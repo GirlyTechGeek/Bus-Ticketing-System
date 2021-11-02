@@ -1,0 +1,7 @@
+{
+  "name": "swift-pwa",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
