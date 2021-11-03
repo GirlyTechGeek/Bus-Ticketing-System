@@ -1,0 +1,47 @@
+ion-content {
+	--background: #fff;
+	.sw-img {
+		max-width: 200px;
+		max-height: 130px;
+		position: absolute;
+		border-radius: 8px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		padding: 5px;
+	}
+	#topToBottom{
+		top: 50%;
+		position: relative;
+		animation: drop 5s 1;
+		animation-direction: alternate;
+	}
+	@keyframes drop {
+		50%{
+			left: 0;
+			top: -10%;
+		}
+	}
+	.sw-imgs {
+		max-width: 200px;
+		max-height: 100px;
+		position: absolute;
+		border-radius: 8px;
+		top: 90%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		padding: 5px;
+	}
+	#bottomToTop{
+		top: 90%;
+		position: relative;
+		animation: fall 5s 1;
+		animation-direction: alternate;
+	}
+	@keyframes fall {
+		90%{
+			left: 0;
+			bottom: -10%;
+		}
+	}
+}
