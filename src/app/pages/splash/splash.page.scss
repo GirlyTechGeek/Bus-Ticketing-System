@@ -19,7 +19,7 @@ ion-content {
 	@keyframes drop {
 		50%{
 			left: 0;
-			top: -10%;
+			top: -30%;
 		}
 	}
 	.sw-imgs {
@@ -41,7 +41,7 @@ ion-content {
 	@keyframes fall {
 		90%{
 			left: 0;
-			bottom: -10%;
+			top: 120%;
 		}
 	}
 }
