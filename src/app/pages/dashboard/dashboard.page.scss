@@ -1,1 +1,39 @@
-
+ion-icon{
+    font-size: 25px;
+}
+.db-card{
+    margin: 0 !important;
+}
+.db-sum{
+    text-transform: uppercase;
+}
+.db-card ion-card-content{
+    color:  #1F6B8E;
+    font-size: x-small;
+    font-weight: bold;
+    text-align: center;
+}
+h2{
+    text-transform: uppercase;
+    font-size: small;
+    font-weight: bold; 
+    padding-left: 1rem;
+}
+h6{
+    color:  #1F6B8E;
+    font-size: small;
+    font-weight: bold; 
+}
+p{
+    color:  #1F6B8E;
+    font-size: x-small;
+    font-weight: bold;  
+}
+.goal{
+    color: #F37135;
+    width: 5vh;
+    height: 5vh;
+    border-radius: 5px;
+    padding-top: 10px;
+    background-color: #d3d3d3;
+}
