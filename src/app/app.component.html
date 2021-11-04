@@ -4,7 +4,7 @@
       <ion-content >
         <ion-list  lines="none" class="list-nav">
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]"
+            <ion-item no-lines (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]"
               detail="false" [class.selected]="selectedIndex == i">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>

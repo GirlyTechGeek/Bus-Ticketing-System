@@ -15,67 +15,67 @@ export class AppComponent {
     {
       title: 'Dashboard',
       url: 'dashboard',
-      icon: 'easel'
+      icon: 'bar-chart'
     },
     {
       title: 'Deposit',
       url: '/deposit',
-      icon: 'film'
+      icon: 'wallet'
     },
     {
       title: 'History',
       url: '/history',
-      icon: 'film'
+      icon: 'list'
     },
     {
       title: 'Loan',
       url: '/loan',
-      icon: 'film'
+      icon: 'barcode'
     },
     {
       title: 'Redeem',
       url: '/redeem',
-      icon: 'film'
+      icon: 'cash'
     },
     {
       title: 'Calculator',
       url: '/calculator',
-      icon: 'film'
+      icon: 'calculator'
     },
     {
       title: 'Estatement',
       url: '/e-statement',
-      icon: 'film'
+      icon: 'document'
     },
     {
       title: 'Messages',
       url: '/messages',
-      icon: 'film'
+      icon: 'notifications'
     },
     {
       title: 'My Profile',
       url: '/profile',
-      icon: 'film'
+      icon: 'person-circle'
     },
     {
       title: 'Change Pin',
       url: '/change-pin',
-      icon: 'film'
+      icon: 'finger-print'
     },
     {
       title: 'Tell A Friend',
       url: '/tell-a-friend',
-      icon: 'film'
+      icon: 'share'
     },
     {
       title: 'Contact Us',
       url: '/contact',
-      icon: 'film'
+      icon: 'mail-open'
     },
     {
       title: 'Sign out',
       url: '/login',
-      icon: 'film'
+      icon: 'exit'
     },
   ]
   constructor(
