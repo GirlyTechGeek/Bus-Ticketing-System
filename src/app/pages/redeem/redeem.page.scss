@@ -1,0 +1,40 @@
+ion-input{
+    border: solid 1px rgba(27, 30, 44, 0.801);
+  }
+  .login-page-input{
+    border-radius: 9px;
+    margin-bottom: 0.3rem;
+  } 
+  ion-label{
+    color: #0A3A50;
+    font-weight: bolder;
+    font-size: small;
+}
+.funds{
+    color: #1F6B8E;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+hr {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    border: 0;
+    width: 70px;
+    border-top: 1px solid #1F6B8E;
+  }
+.redeem{
+    color: #0A3A50;
+    font-weight: bold;
+    font-size: small;
+}
+ion-card{
+    margin-top: 25%;
+}
+@media (max-width: 768px) {
+ion-card{
+    margin-top: 55%;
+}
+}
+ion-button{
+    text-transform: uppercase;
+}
