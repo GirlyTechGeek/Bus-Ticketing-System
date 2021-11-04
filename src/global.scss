@@ -24,3 +24,51 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+
+.sw-img{
+    width: 5%;
+    height: 5%;
+}
+@media (max-width: 768px) {
+    .sw-img{
+        width: 15%;
+        height: 15%;
+    }
+}
+ion-label{
+    text-transform: uppercase;
+    }
+    
+    ion-item{
+        font-size: small;
+    }
+    ion-split-pane{ 
+        --border: none !important;
+        ion-menu{
+         --background: var(--ion-color-primary) !important; 
+            ion-content{            
+                --background: var(--ion-color-primary) !important; 
+                
+                ion-item{
+                    --background: var(--ion-color-primary) !important;
+                     --color: #FFFFFF !important;
+                    //  ion-icon{ padding-right: 10px !important; }
+                }
+            }
+        }
+    }
+    ion-content {
+        --background: rgba(238, 238, 238, 0.973);
+    }
+    .list-nav{
+        margin-top: 3rem;
+    }
+    @media (max-width: 768px) {
+    .menu-nav{
+        margin-top: 3rem;
+    }
+    .list-nav{
+        margin-top: 0;
+    }
+    } 

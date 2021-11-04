@@ -1,6 +1,6 @@
 ion-content {
 	--background: #fff;
-	.sw-img {
+	.sp-img {
 		max-width: 200px;
 		max-height: 110px;
 		position: absolute;
@@ -11,7 +11,7 @@ ion-content {
 		padding: 5px;
 	}
     ion-label{
-        color: rgba(24, 46, 66, 0.897);
+        color: #0A3A50;
         font-weight: bolder;
         font-size: 13px;
     }
@@ -20,7 +20,7 @@ ion-content {
     padding-top: 15%;
     padding-left: 2rem;
     h2{
-        color: rgba(33, 59, 83, 0.897);
+        color: #0A3A50;
         font-weight: bolder;
     }
     p{
@@ -32,7 +32,7 @@ ion-input{
     border: solid 1px rgba(27, 30, 44, 0.801);
   }
   ion-button{
-      font-weight:lighter;
+      font-weight:normal;
       color: white;
       text-transform: uppercase;
       height: 40px;
