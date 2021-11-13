@@ -1,5 +1,5 @@
 <ion-app>
-  <ion-split-pane contentId="main-content" [disabled]="!isLoggedIn">
+  <!-- <ion-split-pane contentId="main-content" [disabled]="!isLoggedIn">
     <ion-menu contentId="main-content" type="overlay" class="menu-nav" >
       <ion-content >
         <ion-list  lines="none" class="list-nav">
@@ -14,5 +14,21 @@
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
-  </ion-split-pane>
+  </ion-split-pane> -->
+  <ion-tabs >
+    <ion-tab-bar slot="bottom" *ngIf="this.router.url === '/login' || this.router.url === '/signup'? show : !show">
+      <ion-tab-button tab="track-trip">
+        <ion-label>map</ion-label>
+        <ion-icon name="location"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="dashboard" >
+        <ion-label>Dashboard</ion-label>
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-tab-button>
+      <ion-tab-button tab="games">
+        <ion-label>Setting</ion-label>
+        <ion-icon name="cog"></ion-icon>
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
 </ion-app>

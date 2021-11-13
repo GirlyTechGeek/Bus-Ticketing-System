@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Platform } from '@ionic/angular';
@@ -18,60 +19,20 @@ export class AppComponent {
       icon: 'bar-chart'
     },
     {
-      title: 'Deposit',
-      url: '/deposit',
-      icon: 'wallet'
+      title: 'Booking',
+      url: '/booking',
+      icon: 'ticket'
     },
     {
-      title: 'History',
-      url: '/history',
-      icon: 'list'
-    },
-    {
-      title: 'Loan',
-      url: '/loan',
-      icon: 'barcode'
-    },
-    {
-      title: 'Redeem',
-      url: '/redeem',
-      icon: 'cash'
-    },
-    {
-      title: 'Calculator',
-      url: '/calculator',
-      icon: 'calculator'
-    },
-    {
-      title: 'Estatement',
-      url: '/e-statement',
-      icon: 'document'
-    },
+      title: 'Trips',
+      url: '/trips',
+      icon: 'bus'
+    },  
     {
       title: 'Messages',
-      url: '/messages',
+      url: '/notifications',
       icon: 'notifications'
-    },
-    {
-      title: 'My Profile',
-      url: '/profile',
-      icon: 'person-circle'
-    },
-    {
-      title: 'Change Pin',
-      url: '/change-pin',
-      icon: 'finger-print'
-    },
-    {
-      title: 'Tell A Friend',
-      url: '/tell-a-friend',
-      icon: 'share'
-    },
-    {
-      title: 'Contact Us',
-      url: '/contact',
-      icon: 'mail-open'
-    },
+    },  
     {
       title: 'Sign out',
       url: '/login',
@@ -81,7 +42,8 @@ export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private router: Router,
   ) {
     this.initializeApp();
   }

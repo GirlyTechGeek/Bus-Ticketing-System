@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./deposit.page.scss'],
 })
 export class DepositPage implements OnInit {
-
+  oneway = false
   constructor() { }
 
   ngOnInit() {
   }
-
+  bookOneway(){
+    this.oneway = !this.oneway
+  }
 }

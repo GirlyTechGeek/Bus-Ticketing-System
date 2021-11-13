@@ -57,14 +57,21 @@
     ion-content {
         --background: rgba(238, 238, 238, 0.973);
     }
-    .list-nav{
-        margin-top: 3rem;
-    }
+    // .list-nav{
+    //     margin-top: 3rem;
+    // }
     @media (max-width: 768px) {
-    .menu-nav{
-        margin-top: 3rem;
-    }
+    // .menu-nav{
+    //     margin-top: 3rem;
+    // }
     .list-nav{
         margin-top: 0;
     }
     } 
+    .header-menu{
+        width: 5vh;
+        height: 5vh;
+        border-radius: 25px;
+        background-color: white;
+        margin: 1rem;
+    }

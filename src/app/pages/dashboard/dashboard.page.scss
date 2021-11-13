@@ -1,6 +1,13 @@
 ion-icon{
     font-size: 25px;
+    color:#f3a735;
 }
+ion-item {
+    font-size: small;
+    --border-width: 0;
+    --inner-border-width: 0;
+}
+
 .db-card{
     margin: 0 !important;
 }
@@ -8,7 +15,7 @@ ion-icon{
     text-transform: uppercase;
 }
 .db-card ion-card-content{
-    color:  #1F6B8E;
+    color:  #02526e;
     font-size: x-small;
     font-weight: bold;
     text-align: center;
@@ -20,12 +27,12 @@ h2{
     padding-left: 1rem;
 }
 h6{
-    color:  #1F6B8E;
+    color:  #02526e;
     font-size: small;
     font-weight: bold; 
 }
 p{
-    color:  #1F6B8E;
+    color:  #02526e;
     font-size: x-small;
     font-weight: bold;  
 }
@@ -35,5 +42,12 @@ p{
     height: 5vh;
     border-radius: 5px;
     padding-top: 10px;
-    background-color: #d3d3d3;
+    background-color: #f3f3f3;
 }
+ ion-content { height: 100%; margin: 0; padding: 0; }
+ ion-content {
+    #map {
+        width: 100%;
+        height: 100%;
+    }
+  }

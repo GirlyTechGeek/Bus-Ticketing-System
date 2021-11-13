@@ -11,8 +11,6 @@ import { environment } from '../environments/environment';
 import {IonicStorageModule} from '@ionic/storage';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {GuardService} from './services/gaurd.service';
-import {HttpInterceptorService} from './services/http-interceptor.service';
 import {BnNgIdleService} from 'bn-ng-idle';
 import {Storage} from '@ionic/storage';
 
@@ -34,14 +32,8 @@ import {Storage} from '@ionic/storage';
     providers: [
         StatusBar,
         SplashScreen,
-        GuardService,
         BnNgIdleService,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: HttpInterceptorService,
-            multi: true
-        }
     ],
     bootstrap: [AppComponent]
 })
