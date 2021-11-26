@@ -24,11 +24,13 @@ export class ApiService {
 
     public userregistration(firstName: any, lastName: any, pin: any, phoneNumber: any) {
         return this.httpClient.post<any>(this.baseUrl + '/register.php', { firstName, lastName, pin, phoneNumber })
-            .pipe(map(Users => {
-                return Users;
-            }));
+            .pipe(map(Users => Users));
     }
 
+  public requestPin(phoneNumber: any, pin: any) {
+    return this.httpClient.post<any>(this.baseUrl + '/reset.php', { phoneNumber, pin })
+      .pipe(map(Users => Users));
+  }
     //token
     setToken(token: string) {
         localStorage.setItem('token', token);

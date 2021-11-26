@@ -12,6 +12,9 @@ import { ApiService } from 'src/app/api.service';
 })
 export class LoginPage implements OnInit {
   form: FormGroup;
+  form1: FormGroup;
+  newPin: any;
+  toggleScreen = false;
   private busy: any;
   constructor(
     private fb: FormBuilder,
@@ -24,10 +27,21 @@ export class LoginPage implements OnInit {
       phoneNumber: ['', [Validators.required, Validators.pattern('^(?:[0-9]{10},)*[0-9]{10}$')]],
       pin: ['', Validators.required]
     });
+    this.form1 = this.fb.group({
+      phoneNumber1: ['', [Validators.required, Validators.pattern('^(?:[0-9]{10},)*[0-9]{10}$')]],
+      pin: ['']
+    });
   }
 
+  ionViewWillEnter = () => {
+    this.toggleScreen = false;
+  };
+  // toggle screen
+  toggle() {
+    this.toggleScreen = !this.toggleScreen;
+  }
   ngOnInit() {
-
+     localStorage.removeItem('token');
   }
   submit() {
     return this.freeze().then(async () => {
@@ -45,6 +59,61 @@ export class LoginPage implements OnInit {
             return this.notify('Ooops. Unable to complete your Request. Please try again.');
           });
     });
+  }
+  generatePin(): string {
+    return Math.floor(1000 + Math.random() * 9000).toString();
+  }
+  submit1() {
+    const pin = this.generatePin();
+      this.newPin = pin
+      const msg = `Your pin is ${this.newPin}`;
+      return this.freeze().then(async () => {
+        this.form1.patchValue({
+          pin: this.newPin
+        })
+      await this.dataService.requestPin(this.form1.value.phoneNumber1, this.form1.value.pin)
+        .subscribe(
+          async () => {
+            this.notify(msg);
+            this.form1.reset();
+            const redirect = this.toggle();
+            await this.router.navigate([redirect]);
+            await this.loader.dismiss();
+          },
+          (err: any) => {
+            console.log(err)
+            this.loader.dismiss()
+            return this.notify('Ooops. Unable to complete your Request. Please try again.');
+          });
+    });
+  }
+
+  async forgotPassword(){
+    const pop = await this.alert.create({
+      header: 'Please Confirm',
+      subHeader: 'Are you sure?',
+      message: 'This will initiate a request to <b>CHANGE or RESET</b> <br/>your <b>PIN CODE</b>. ' +
+        '<br/>Do you wish to continue ?',
+      cssClass: 'sw-pop',
+      backdropDismiss: false,
+      mode: 'ios',
+      buttons: [
+        {text: 'Cancel', role: 'cancel'},
+        {
+          text: 'Confirm',
+          role: 'confirm',
+          handler: () => {
+            this.toggle();
+            // this.router.navigate(['/u/change-pin']).then(() => {
+            //
+            // });
+          }
+        }
+      ]
+    });
+    await pop.present();
+    // return this.notify('This will initiate a request to <b>CHANGE or RESET</b> <br/>your <b>PIN CODE</b>. ' +
+    //   '                                \'<br/>Do you wish to continue ?\'');
   }
   // freeze ui
   async freeze() {

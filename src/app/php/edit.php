@@ -9,12 +9,11 @@ if(isset($postdata) && !empty($postdata))
 $phoneNumber = trim($request->phoneNumber);
 $pin = trim( $request->pin);
 try {
-    $query = $writeDB->prepare("SELECT * FROM users WHERE pin= $pin AND phoneNumber=$phoneNumber");
+    $query = $writeDB->prepare("UPDATE users set pin=$pin where phoneNumber='$phoneNumber'");
     $query->bindParam("phoneNumber", $phoneNumber, PDO::PARAM_INT);
-    $enc_password = hash('sha256', $pin);
-    $query->bindParam("pin", $enc_password, PDO::PARAM_INT);
+     $enc_password = hash('sha256', $pin);
+        $query->bindParam("pin", $enc_password, PDO::PARAM_INT);
     $query->execute();
-//     echo json_decode($query);
     $rowCount = $query->rowCount();
     if ($rowCount == 0) {
         $response = new Response();

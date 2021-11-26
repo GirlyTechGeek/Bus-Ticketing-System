@@ -1,9 +1,31 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>banner</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content>
-
+  <ion-header lines="none">
+    <ion-toolbar >
+      <ion-title>Profile</ion-title>
+      <ion-buttons slot="start">
+        <ion-button id="cl" (click)="dismissed()">Close</ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button (click)="editPage()">Edit</ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <form>
+  <div style="margin: 2rem">
+    <ion-label position="stacked"> Username</ion-label>
+    <ion-input [disabled]="true" shape="rectangle" class="login-page-input" type="text" name="username" formControlName="username"></ion-input>
+    <ion-label position="stacked">First Name</ion-label>
+    <ion-input shape="rectangle" class="login-page-input" name="phoneNumber"
+               type="text"></ion-input>
+    <ion-label position="stacked">Last Name</ion-label>
+    <ion-input shape="rectangle" class="login-page-input" name="phoneNumber"
+               type="text"></ion-input>
+    <ion-label position="stacked">Phone Number</ion-label>
+    <ion-input shape="rectangle" class="login-page-input" name="pin"  type="tel">
+    </ion-input>
+    <ion-button *ngIf="toggleScreen" color="success" class="login-page-button mt-3" expand="block" type="submit" >
+      Submit</ion-button>
+  </div>
+  </form>
 </ion-content>

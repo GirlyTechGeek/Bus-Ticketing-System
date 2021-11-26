@@ -31,35 +31,35 @@
       </ion-tab-button>
     </ion-tab-bar>
   </ion-tabs> -->
-  <ion-tabs >  
+  <ion-tabs >
 
     <ion-fab vertical="bottom" horizontal="center" translucent="true" *ngIf="this.router.url === '/splash' ||this.router.url === '/login' || this.router.url === '/signup'? show : !show">
       <ion-fab-button routerLink="/dashboard">
         <ion-icon name="add-circle"></ion-icon>
       </ion-fab-button>
     </ion-fab>
-    
+
     <ion-tab-bar slot="bottom" class="ion-no-border" *ngIf="this.router.url === '/splash' ||this.router.url === '/login' || this.router.url === '/signup'? show : !show">
-      
-  <ion-tab-button tab="tab-profile">
+
+  <ion-tab-button (click)="presentModal()">
         <ion-icon name="person"></ion-icon>
       </ion-tab-button>
-      
+
   <ion-tab-button tab="track-trip">
         <ion-icon name="compass"></ion-icon>
       </ion-tab-button>
 
       <svg height="50" viewBox="0 0 100 50" width="100" xmlns="http://www.w3.org/2000/svg"><path d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z" fill="red" fill-rule="evenodd"></path></svg>
-  
+
       <ion-tab-button tab="notifications" class="notifs">
         <ion-icon name="notifications"></ion-icon>
-        <ion-badge *ngIf="new_activities">{{new_activities}}</ion-badge>
+<!--        <ion-badge *ngIf="new_activities">{{new_activities}}</ion-badge>-->
       </ion-tab-button>
-      <ion-tab-button tab="settings" class="comments">
+      <ion-tab-button class="comments" (click)="presentActionSheet()">
         <ion-icon name="cog"></ion-icon>
-        <ion-badge *ngIf="new_message">{{new_message}}</ion-badge>
+<!--        <ion-badge *ngIf="new_message">{{new_message}}</ion-badge>-->
       </ion-tab-button>
-      
+
 
     </ion-tab-bar>
   </ion-tabs>

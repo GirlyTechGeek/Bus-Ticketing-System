@@ -9,6 +9,8 @@
   <div>
     <form action="register.php" [formGroup]="form" (submit)="submit($event)">
     <div style="margin: 2rem">
+      <ion-label position="stacked"> Username</ion-label>
+      <ion-input shape="rectangle" class="login-page-input" type="text" name="username" formControlName="username"></ion-input>
       <ion-label position="stacked">First Name</ion-label>
       <ion-input shape="rectangle" class="login-page-input" type="text" name="firstName" formControlName="firstName"></ion-input>
       <ion-label position="stacked">Last Name</ion-label>

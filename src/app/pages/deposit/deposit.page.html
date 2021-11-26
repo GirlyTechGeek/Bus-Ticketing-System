@@ -1,22 +1,16 @@
-<ion-header>
-  <ion-toolbar color="primary" style="padding-right: 1.5rem;">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title align-title="center">Booking</ion-title>
-  </ion-toolbar>
-</ion-header>
+
 <ion-content fullscreen>
-  <ion-card color="light">
+  <div class="grad"></div>
+  <ion-card class="main" color="light">
     <div *ngIf="!oneway">
       <ion-card-header >
         <ion-grid>
           <ion-row>
             <ion-col size="6">
-              <ion-button expand="full" >Roundtrip</ion-button>
+              <ion-button shape="round" expand="full" >Roundtrip</ion-button>
             </ion-col>
             <ion-col size="6">
-              <ion-button expand="full" color="light" (click)="bookOneway()">Oneway</ion-button>
+              <ion-button   expand="full" color="light" (click)="bookOneway()">Oneway</ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -25,7 +19,7 @@
         <ion-card class="inner">
           <ion-list>
             <ion-item>
-              <ion-searchbar search-icon="location"  placeholder="From"></ion-searchbar>
+              <ion-searchbar search-icon="none"  placeholder="From"></ion-searchbar>
             </ion-item>
             <ion-item lines="none">
         <ion-searchbar  search-icon="location" placeholder="To"></ion-searchbar>
@@ -51,10 +45,10 @@
         <ion-grid>
           <ion-row>
             <ion-col size="6">
-              <ion-button expand="full" color="light" (click)="bookOneway()">Roundtrip</ion-button>
+              <ion-button class="btn" expand="full" color="light" (click)="bookOneway()">Roundtrip</ion-button>
             </ion-col>
             <ion-col size="6">
-              <ion-button expand="full"   >Oneway</ion-button>
+              <ion-button shape="round" expand="full">Oneway</ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>

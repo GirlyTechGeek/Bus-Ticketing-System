@@ -31,15 +31,30 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <script 
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn30gHlzPINlfeZpaq2C6r4HCPvrwVbrs" async defer>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn30gHlzPINlfeZpaq2C6r4HCPvrwVbrs&callback=initMap" async defer>
 </script>
-  <!-- <script async
-  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBn30gHlzPINlfeZpaq2C6r4HCPvrwVbrs">
-</script> -->
+  <script>
+    // Initialize and add the map
+    function initMap() {
+      // The location of Uluru
+      const uluru = { lat: -25.344, lng: 131.036 };
+      // The map, centered at Uluru
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 4,
+        center: uluru,
+      });
+      // The marker, positioned at Uluru
+      const marker = new google.maps.Marker({
+        position: uluru,
+        map: map,
+      });
+    }
+  </script>
 </head>
 
 <body>
   <app-root>
+    <div id="map"></div>
   </app-root>
 </body>
 

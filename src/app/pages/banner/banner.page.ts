@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ModalController} from '@ionic/angular';
 
 @Component({
   selector: 'app-banner',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./banner.page.scss'],
 })
 export class BannerPage implements OnInit {
-
-  constructor() { }
+  currentModel = null;
+  toggleScreen = false;
+  constructor(
+    public modalController: ModalController,
+  ) { }
 
   ngOnInit() {
   }
-
+  editPage(){
+      this.toggleScreen = !this.toggleScreen
+  }
+  dismissed() {
+   return  this.modalController.dismiss();
+  }
 }
