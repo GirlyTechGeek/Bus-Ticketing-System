@@ -12,7 +12,7 @@ let map: google.maps.Map;
 
 
 export class DashboardPage implements OnInit {
-
+  user: any;
   constructor(
     private menu: MenuController,
     ) { }
@@ -25,7 +25,9 @@ export class DashboardPage implements OnInit {
   //   });
   // }
   ngOnInit() {
+    this.user = localStorage.getItem('user');
   }
+
 
 
 }

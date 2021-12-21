@@ -14,6 +14,10 @@ export class LoginPage implements OnInit {
   form: FormGroup;
   form1: FormGroup;
   newPin: any;
+  firstN: any;
+  second: any;
+  numberP: any
+  usr: any;
   toggleScreen = false;
   private busy: any;
   constructor(
@@ -47,15 +51,24 @@ export class LoginPage implements OnInit {
     return this.freeze().then(async () => {
       await this.dataService.userlogin(this.form.value.phoneNumber, this.form.value.pin)
         .subscribe(
-          async () => {
-            this.form.reset();
+          async (res) => {
+            this.usr = res[0].userName;
+            this.firstN = res[0].firstName;
+            this.second = res[0].lastName;
+            this.numberP = res[0].phoneNumber;
+              this.form.reset();
+            localStorage.setItem('user',this.usr );
+            localStorage.setItem('first',this.firstN );
+            localStorage.setItem('second',this.second );
+            localStorage.setItem('number',this.numberP );
+            // localStorage.setItem('response',JSON.stringify(res) );
             const redirect = this.dataService.redirectUrl ? this.dataService.redirectUrl : '/dashboard';
-            this.router.navigate([redirect]);
-            this.loader.dismiss()
+            await this.router.navigate([redirect]);
+            await this.loader.dismiss();
           },
           (err: any) => {
-            console.log(err)
-            this.loader.dismiss()
+            console.log(err);
+            this.loader.dismiss();
             return this.notify('Ooops. Unable to complete your Request. Please try again.');
           });
     });

@@ -18,6 +18,9 @@ class Response
     {
         $this->_httpStatusCode = $httpStatusCode;
     }
+    public function getResponseData($responseData){
+        $this->_responseData = $responseData;
+    }
 
     public function addMessage($message)
     {

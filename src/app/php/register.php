@@ -8,10 +8,12 @@ if (isset($postdata) && !empty($postdata)) {
     $firstName = trim($request->firstName);
     $lastName =  trim($request->lastName);
     $phoneNumber =  trim($request->phoneNumber);
+    $userName = trim($request->userName);
     $pin =  trim($request->pin);
     try {
-        $query = $writeDB->prepare("INSERT INTO users (firstName,lastName,phoneNumber,pin) VALUES ('$firstName','$lastName','$phoneNumber','$pin')");
+        $query = $writeDB->prepare("INSERT INTO users (userName,firstName,lastName,phoneNumber,pin) VALUES ('$userName','$firstName','$lastName','$phoneNumber','$pin')");
         $query->bindParam("firstName", $firstName, PDO::PARAM_STR);
+        $query->bindParam("userName", $firstName, PDO::PARAM_STR);
         $query->bindParam("lastName", $lastName, PDO::PARAM_STR);
         $query->bindParam("phoneNumber", $phoneNumber, PDO::PARAM_INT);
         $enc_password = password_hash('$pin', PASSWORD_DEFAULT);

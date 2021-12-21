@@ -20,9 +20,6 @@ export class SplashPage implements OnInit {
 
     ngOnInit = () => {};
     ionViewWillEnter = async () => {
-       setTimeout(async () => {
-        return this.router.navigate(['/login'])
-        }, 3000)
-       
-    }
+       setTimeout(async () => this.router.navigate(['/login']), 3000);
+    };
 }

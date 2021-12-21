@@ -22,14 +22,31 @@ export class ApiService {
             }));
     }
 
-    public userregistration(firstName: any, lastName: any, pin: any, phoneNumber: any) {
-        return this.httpClient.post<any>(this.baseUrl + '/register.php', { firstName, lastName, pin, phoneNumber })
+    public userregistration(username: any,firstName: any, lastName: any, pin: any, phoneNumber: any) {
+        return this.httpClient.post<any>(this.baseUrl + '/register.php', { username, firstName, lastName, pin, phoneNumber })
             .pipe(map(Users => Users));
     }
-
+  public updateUser(firstName: any, lastName: any, phoneNumber: any, userName: any) {
+    return this.httpClient.post<any>(this.baseUrl + '/updateProfile.php', { firstName, lastName,userName, phoneNumber })
+      .pipe(map(Users => Users));
+  }
+  public bookTrip(destination: any,departureLocation: any,departureDate: any,returnDate: any,userName: any,hasPaid: any,pickupLocation: any) {
+    return this.httpClient.post<any>(this.baseUrl + '/trip.php', { destination,departureLocation,departureDate,returnDate,userName,hasPaid, pickupLocation })
+      .pipe(map(Users => Users));
+  }
+  public bookOneWayTrip(destination: any,departureLocation: any,departureDate: any, userName: any,hasPaid: any,pickupLocation: any ) {
+    return this.httpClient.post<any>(this.baseUrl + '/trip.php', { destination,departureLocation,departureDate,userName,hasPaid,pickupLocation })
+      .pipe(map(Users => Users));
+  }
   public requestPin(phoneNumber: any, pin: any) {
     return this.httpClient.post<any>(this.baseUrl + '/reset.php', { phoneNumber, pin })
       .pipe(map(Users => Users));
+  }
+  public getBooking() {
+    return this.httpClient.get(this.baseUrl + '/booking.php').toPromise();
+  }
+  public getAvailability(destination: any, departureDate: any ) {
+    return this.httpClient.post(this.baseUrl + '/availability.php', {destination, departureDate})
   }
     //token
     setToken(token: string) {
@@ -40,6 +57,7 @@ export class ApiService {
     }
     deleteToken() {
         localStorage.removeItem('token');
+      localStorage.removeItem('user');
     }
     isLoggedIn() {
         const usertoken = this.getToken();

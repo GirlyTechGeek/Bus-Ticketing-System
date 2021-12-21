@@ -15,7 +15,6 @@ export class AppComponent {
   currentPageTitle = 'Dashboard';
   loginbtn: boolean;
   logoutbtn: boolean;
-
   appPages = [
     {
       title: 'Dashboard',

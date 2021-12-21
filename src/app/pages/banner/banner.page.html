@@ -11,21 +11,32 @@
       </ion-buttons>
     </ion-toolbar>
   </ion-header>
-  <form>
-  <div style="margin: 2rem">
+  <div style="margin: 2rem" *ngIf="!toggleScreen">
     <ion-label position="stacked"> Username</ion-label>
-    <ion-input [disabled]="true" shape="rectangle" class="login-page-input" type="text" name="username" formControlName="username"></ion-input>
+    <ion-input  mode="ios" [disabled]="true" value="{{userN}}" shape="rectangle" class="login-page-input" type="text" name="username" ></ion-input>
     <ion-label position="stacked">First Name</ion-label>
-    <ion-input shape="rectangle" class="login-page-input" name="phoneNumber"
+    <ion-input  mode="ios" shape="rectangle" disabled value="{{firstN}}" class="login-page-input" name="phoneNumber"
                type="text"></ion-input>
     <ion-label position="stacked">Last Name</ion-label>
-    <ion-input shape="rectangle" class="login-page-input" name="phoneNumber"
+    <ion-input  mode="ios" shape="rectangle" disabled value="{{second}}" class="login-page-input" name="phoneNumber"
                type="text"></ion-input>
     <ion-label position="stacked">Phone Number</ion-label>
-    <ion-input shape="rectangle" class="login-page-input" name="pin"  type="tel">
+    <ion-input  mode="ios" shape="rectangle" disabled value="{{numberP}}" class="login-page-input" name="pin"  type="tel">
     </ion-input>
-    <ion-button *ngIf="toggleScreen" color="success" class="login-page-button mt-3" expand="block" type="submit" >
-      Submit</ion-button>
+  </div>
+  <form [formGroup]="form" *ngIf="toggleScreen" (submit)="submit()">
+  <div style="margin: 2rem">
+    <ion-label position="stacked"> Username</ion-label>
+    <ion-input mode="ios"  disabled  shape="rectangle" class="login-page-input" formControlName="userName" type="text"  ></ion-input>
+    <ion-label position="stacked">First Name</ion-label>
+    <ion-input  mode="ios"shape="rectangle"   class="login-page-input"  formControlName="firstName" type="text"></ion-input>
+    <ion-label position="stacked">Last Name</ion-label>
+    <ion-input  mode="ios" shape="rectangle" class="login-page-input"  formControlName="lastName" type="text"></ion-input>
+    <ion-label position="stacked">Phone Number</ion-label>
+    <ion-input shape="rectangle"  class="login-page-input"  formControlName="phoneNumber" inputmode="tel" type="tel">
+    </ion-input>
+    <ion-button  mode="ios" color="success" class="login-page-button mt-3" expand="block" type="submit" >
+      Update</ion-button>
   </div>
   </form>
 </ion-content>

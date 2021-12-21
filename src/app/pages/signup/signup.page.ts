@@ -17,7 +17,6 @@ export class SignupPage implements OnInit {
   public form: FormGroup;
 
   constructor(
-    public menuCtrl: MenuController,
     private menu: MenuController,
     private alert: AlertController,
     private loader: LoadingController,
@@ -30,6 +29,7 @@ export class SignupPage implements OnInit {
     this.form = fb.group({
       phoneNumber: ['', [Validators.required, Validators.pattern('^(?:[0-9]{10},)*[0-9]{10}$')]],
       firstName: ['', [Validators.required]],
+      username: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       pin: [''],
     });
@@ -48,7 +48,7 @@ export class SignupPage implements OnInit {
       this.form.patchValue({
         pin: this.pin
       })
-      await this.dataService.userregistration(this.form.value.firstName, this.form.value.lastName, this.form.value.pin, this.form.value.phoneNumber)
+      await this.dataService.userregistration(this.form.value.username,this.form.value.firstName, this.form.value.lastName, this.form.value.pin, this.form.value.phoneNumber)
         .subscribe(async () => {
           this.notify(msg);
           this.form.reset();
