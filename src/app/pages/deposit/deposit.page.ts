@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from '../../api.service';
 import {AlertController, LoadingController, ModalController} from '@ionic/angular';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import {LocationStrategy} from "@angular/common";
 
 @Component({
   selector: 'app-deposit',
@@ -12,8 +13,13 @@ import {Router} from "@angular/router";
 export class DepositPage implements OnInit {
   oneway = false;
   results: any ;
+  brands: any;
+  brand: any;
   findLocation: any;
+  fares: any;
+  fares1: any;
   public toggle = false;
+  public changeToggle = false;
   public locations =[
         {id: 1, location: 'accra'},
         {id: 1, location: 'accra'},
@@ -23,6 +29,7 @@ export class DepositPage implements OnInit {
         {id: 1, location: 'accra'},
         {id: 1, location: 'accra'}
   ];
+
   private busy: any;
   public form: FormGroup;
   public form1: FormGroup;
@@ -34,6 +41,7 @@ export class DepositPage implements OnInit {
     private builder: FormBuilder,
     private alert: AlertController,
     private router: Router,
+    private location: LocationStrategy
   ) {
     this.form = builder.group({
       // userID: [''],
@@ -41,18 +49,18 @@ export class DepositPage implements OnInit {
       departureLocation: [''],
       departureDate: [''],
       returnDate: [''],
-      // currentLocation: [''],
+      time: [''],
       userName: [''],
       hasPaid: [''],
       pickupLocation: ['']
     });
     this.form1 = builder.group({
       // userID: [''],
-      destination: [''],
-      departureLocation: [''],
-      departureDate: [''],
+      destination1: [''],
+      departureLocation1: [''],
+      departureDate1: [''],
       // returnDate: [''],
-      // currentLocation: [''],
+      time1: [''],
       userName: [''],
       hasPaid: ['']
     });
@@ -64,6 +72,7 @@ export class DepositPage implements OnInit {
   ngOnInit() {
     this.ionViewWillEnter();
     this.usersName = localStorage.getItem('user');
+
   }
   // eslint-disable-next-line @typescript-eslint/member-ordering
   customActionSheetOptions: any = {
@@ -71,10 +80,13 @@ export class DepositPage implements OnInit {
     subHeader: 'Select a pickup location',
   };
   ionViewWillEnter = () => {
-    this.dataService.getBooking().then(async (res) => {
-      this.results = res;
-      console.log(res);
-    });
+    // setInterval( ()=>{
+      this.dataService.getLocations().then(async (res) => {
+        this.results = res;
+        console.log(res);
+      }
+    )
+    // }, 20000);
   };
   bookOneway(){
     this.oneway = !this.oneway;
@@ -90,14 +102,17 @@ export class DepositPage implements OnInit {
     return await this.busy.present();
   }
   async submit() {
-    const msg = 'You have successfully updated your profile';
     return this.freeze().then(async () => {
     await this.dataService.getAvailability(
+      // this.form.value.departureLocation,
       this.form.value.destination,
       this.form.value.departureDate.split('T')[0],
     ).subscribe(async (res) => {
       this.results = res;
       console.log(this.results[0]);
+      this.fares = this.results[0].fare;
+      this.brand = this.results[0].brand;
+      localStorage.setItem('seats', this.results[0].seats);
       await this.loader.dismiss();
       const pop = await this.alert.create({
         header: 'Confirmation',
@@ -114,6 +129,7 @@ export class DepositPage implements OnInit {
             role: 'confirm',
             handler: async (data) => {
               this.toggle = true;
+              this.changeToggle = true;
             }
           }
         ]
@@ -130,6 +146,9 @@ export class DepositPage implements OnInit {
   }
   async finalSubmit() {
     return this.freeze().then(async () => {
+      const newSeat = localStorage.getItem('seats');
+      console.log(newSeat)
+      const tryDate = this.form.value.time.split('T')[1]
       await this.dataService.bookTrip(
         this.form.value.destination,
         this.form.value.departureLocation,
@@ -137,7 +156,10 @@ export class DepositPage implements OnInit {
         this.form.value.returnDate.split('T')[0],
         this.usersName,
         'false',
-        this.findLocation
+        this.findLocation,
+        this.fares,
+        tryDate.split('.')[0].toString(),
+        this.brand
       )
         .subscribe(
           async () => {
@@ -166,17 +188,20 @@ export class DepositPage implements OnInit {
             this.notify(`Ooops. Unable to complete your Request. Please try again.`);
           }
         );
+      this.location.back()
     });
   }
   submit1() {
-    const msg = 'You have successfully updated your profile';
+    // const msg = 'You have successfully updated your profile';
     return this.freeze().then(async () => {
       await this.dataService.getAvailability(
-        this.form.value.destination,
-        this.form.value.departureDate.split('T')[0],
+        this.form1.value.destination1,
+        this.form1.value.departureDate1.split('T')[0],
       ).subscribe(async (res) => {
         this.results = res;
         console.log(this.results[0]);
+        this.fares1 = this.results[0].fare;
+        this.brands = this.results[0].brand;
         await this.loader.dismiss();
         const pop = await this.alert.create({
           header: 'Confirmation',
@@ -239,13 +264,18 @@ export class DepositPage implements OnInit {
   }
   async final1Submit() {
     return this.freeze().then(async () => {
-      await this.dataService.bookOneWayTrip(
-        this.form.value.destination,
-        this.form.value.departureLocation,
-        this.form.value.departureDate.split('T')[0],
+      const tryDate = this.form.value.time.split('T')[1]
+      await this.dataService.bookTrip(
+        this.form1.value.destination1,
+        this.form1.value.departureLocation1,
+        this.form1.value.departureDate1.split('T')[0],
+        this.form1.value.departureDate1.split('T')[0],
         this.usersName,
         'false',
-        this.findLocation
+        this.findLocation,
+        this.fares1,
+        tryDate.split('.')[0].toString(),
+        this.brands
       )
         .subscribe(
           async () => {
@@ -262,6 +292,9 @@ export class DepositPage implements OnInit {
                 {
                   text: 'Confirm',
                   role: 'confirm',
+                  handler: async (data) =>{
+                    this.notify('Trip booked successfully. Continue to view boarding ticket');
+                  }
                 }
               ]
             });
@@ -274,6 +307,7 @@ export class DepositPage implements OnInit {
             this.notify(`Ooops. Unable to complete your Request. Please try again.`);
           }
         );
+      this.location.back()
     });
   }
 

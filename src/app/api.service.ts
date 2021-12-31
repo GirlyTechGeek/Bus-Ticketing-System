@@ -30,8 +30,16 @@ export class ApiService {
     return this.httpClient.post<any>(this.baseUrl + '/updateProfile.php', { firstName, lastName,userName, phoneNumber })
       .pipe(map(Users => Users));
   }
-  public bookTrip(destination: any,departureLocation: any,departureDate: any,returnDate: any,userName: any,hasPaid: any,pickupLocation: any) {
-    return this.httpClient.post<any>(this.baseUrl + '/trip.php', { destination,departureLocation,departureDate,returnDate,userName,hasPaid, pickupLocation })
+  public bookTrip(destination: any,locations: any,departureDate: any,returnDate: any,userName: any,hasPaid: any,pickupLocation: any, fares: any, requestTime: any, brand: any) {
+    return this.httpClient.post<any>(this.baseUrl + '/trip.php', { destination,locations,departureDate,returnDate,userName,hasPaid, pickupLocation, fares,requestTime, brand })
+      .pipe(map(Users => Users));
+  }
+  public editTrip(destination: any,locations: any,departureDate: any,returnDate: any,userName: any,hasPaid: any,pickupLocation: any, fares: any, requestTime: any, brand: any,tripID: any) {
+    return this.httpClient.post<any>(this.baseUrl + '/edit-trip.php', { destination,locations,departureDate,returnDate,userName,hasPaid, pickupLocation, fares,requestTime, brand, tripID })
+      .pipe(map(Users => Users));
+  }
+  public deleteTrip(tripID: any) {
+    return this.httpClient.post<any>(this.baseUrl + '/delete-trip.php', {  tripID })
       .pipe(map(Users => Users));
   }
   public bookOneWayTrip(destination: any,departureLocation: any,departureDate: any, userName: any,hasPaid: any,pickupLocation: any ) {
@@ -42,8 +50,17 @@ export class ApiService {
     return this.httpClient.post<any>(this.baseUrl + '/reset.php', { phoneNumber, pin })
       .pipe(map(Users => Users));
   }
-  public getBooking() {
-    return this.httpClient.get(this.baseUrl + '/booking.php').toPromise();
+  public getBooking(departureDate: any, locations: any, destination: any) {
+    return this.httpClient.post(this.baseUrl + '/booking1.php', {departureDate, locations, destination});
+  }
+  public getLocations() {
+    return this.httpClient.get(this.baseUrl + '/locations.php').toPromise();
+  }
+  public getMessages() {
+    return this.httpClient.get(this.baseUrl + '/messages.php').toPromise();
+  }
+  public getTrips(username: any) {
+    return this.httpClient.post(this.baseUrl + '/tripHistory.php', {username});
   }
   public getAvailability(destination: any, departureDate: any ) {
     return this.httpClient.post(this.baseUrl + '/availability.php', {destination, departureDate})

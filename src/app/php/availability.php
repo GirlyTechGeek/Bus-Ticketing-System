@@ -10,7 +10,7 @@ if(isset($postdata) && !empty($postdata))
     $destination =  trim($request->destination);
     $departureDate = trim($request->departureDate);
 try {
-$query = $writeDB->prepare("SELECT returnDate, fare, destination, locations, departureDate FROM bookings WHERE destination='$destination' AND departureDate='$departureDate'");
+$query = $writeDB->prepare("SELECT returnDate, fare, destination, locations, departureDate,brand FROM bookings WHERE destination='$destination' AND departureDate='$departureDate'");
  $query->bindParam("destination", $destination, PDO::PARAM_STR);
     $query->bindParam("departureDate", date('Y-m-d', strtotime($departureDate)) ,PDO::PARAM_STR);
     $query->execute();

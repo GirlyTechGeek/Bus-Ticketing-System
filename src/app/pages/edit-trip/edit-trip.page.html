@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary" style="padding-right: 1.5rem;">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align:center;">Edit Trip</ion-title>
+    <!-- <img slot="end" class="sw-img" src="/assets/icons/bus.png" alt="dalex-swift" /> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <div class="grad"></div>
+  <ion-card  mode="ios" class="main" color="light">
+    <form [formGroup]="form" (submit)="submit()" >
+      <div >
+        <ion-card-header  mode="ios" >
+          <h2 class="ion-text-center">EDIT YOUR TRIP</h2>
+          <hr />
+        </ion-card-header>
+        <ion-card-content color="light" >
+          <!--        <ion-list *ngIf="results">-->
+          <!--          <ion-item>{{results.driver}}</ion-item>-->
+          <!--        </ion-list>-->
+          <ion-label >From</ion-label>
+          <ion-select mode="ios" formControlName="departureLocation" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
+            <ion-select-option   *ngFor="let i of results" [value]="i.locationName" >{{i.locationName}}</ion-select-option>
+          </ion-select>
+          <!--        <ion-input shape="rectangle" class="login-page-input" name="phoneNumber"-->
+          <!--                   type="tel"></ion-input>-->
+          <ion-label>To</ion-label>
+          <ion-select mode="ios" formControlName="destination" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
+            <ion-select-option  *ngFor="let i of results" value="{{i.locationName}}" >{{i.locationName}}</ion-select-option>
+          </ion-select>
+          <ion-label>Departure</ion-label>
+          <ion-datetime mode="ios" placeholder="Select Date" formControlName="departureDate"  display-timezone="utc"></ion-datetime>
+          <ion-label>Return</ion-label>
+          <ion-datetime mode="ios" placeholder="Select Date" formControlName="returnDate" display-timezone="utc" ></ion-datetime>
+          <ion-label>Time</ion-label>
+          <ion-datetime displayFormat="HH:mm A"  formControlName="time" placeholder="Select Time"></ion-datetime>
+          <ion-button style="margin-top: 1.5rem; text-transform: uppercase" mode="ios" color="success" type="submit" expand="block">Search</ion-button>
+        </ion-card-content>
+      </div>
+    </form>
+  </ion-card>
+</ion-content>

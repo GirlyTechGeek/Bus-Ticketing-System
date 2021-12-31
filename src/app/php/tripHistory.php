@@ -4,15 +4,16 @@ require_once("response.php");
 $writeDB = DB::connectWriteDB();
 $postdata = file_get_contents("php://input");
 $request = json_decode($postdata);
-if( $_SERVER['REQUEST_METHOD'] == 'GET')
+if(isset($postdata) && !empty($postdata))
 {
-
+ $phpDate = strtotime($departureDate);
+    $username =  trim($request->username);
 try {
-    $query = $writeDB->prepare("SELECT bookingID,departureDate,driver,fare,destination,returnDate,locations FROM bookings");
+$query = $writeDB->prepare("SELECT returnDate, fares, destination, locations, departureDate, pickupLocation, brand, tripID FROM trips WHERE username='$username'");
+ $query->bindParam("username", $username, PDO::PARAM_STR);
     $query->execute();
 
 
-//     echo json_decode($query);
     $rowCount = $query->rowCount();
     if ($rowCount == 0) {
         $response = new Response();
@@ -24,20 +25,10 @@ try {
     }
     $userArray = array();
 
-//     $row = $query->fetch(PDO::FETCH_ASSOC);
  while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
                 $userArray[] = $row;
             }
 echo json_encode($userArray);
-//             $returnData = array();
-//
-//             $response = new Response();
-//             $response->setHttpStatusCode(200);
-//             $response->setSuccess(true);
-//             $response->toCache(true);
-//             $response->setData($userArray);
-//             $response->send();
-//             exit;
 
     return $writeDB->lastInsertId();
 } catch (PDOException $e) {

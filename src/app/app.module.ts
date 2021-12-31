@@ -13,6 +13,8 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BnNgIdleService} from 'bn-ng-idle';
 import {Storage} from '@ionic/storage';
+import {DatePipe} from "@angular/common";
+
 
 @NgModule({
     declarations: [AppComponent],
@@ -40,6 +42,7 @@ import {Storage} from '@ionic/storage';
         SplashScreen,
         BnNgIdleService,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+      DatePipe
     ],
     bootstrap: [AppComponent]
 })

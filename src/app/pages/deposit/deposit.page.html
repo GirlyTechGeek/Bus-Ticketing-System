@@ -17,7 +17,7 @@
           <ion-grid >
             <ion-row>
               <ion-col  size="6">
-                <ion-button  mode="ios"  expand="block" >Roundtrip</ion-button>
+                <ion-button class="button-color" color="light"   mode="ios"  expand="block" >Roundtrip</ion-button>
               </ion-col>
               <ion-col size="6">
                 <ion-button  mode="ios"  expand="block" color="light" (click)="bookOneway()">Oneway</ion-button>
@@ -31,33 +31,37 @@
           <!--        </ion-list>-->
           <ion-label >From</ion-label>
           <ion-select mode="ios" formControlName="departureLocation" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
-            <ion-select-option   *ngFor="let i of results" [value]="i.locations" >{{i.locations}}</ion-select-option>
+            <ion-select-option   *ngFor="let i of results" [value]="i.locationName" >{{i.locationName}}</ion-select-option>
           </ion-select>
           <!--        <ion-input shape="rectangle" class="login-page-input" name="phoneNumber"-->
           <!--                   type="tel"></ion-input>-->
           <ion-label>To</ion-label>
           <ion-select mode="ios" formControlName="destination" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
-            <ion-select-option  *ngFor="let i of results" value="{{i.locations}}" >{{i.locations}}</ion-select-option>
+            <ion-select-option  *ngFor="let i of results" value="{{i.locationName}}" >{{i.locationName}}</ion-select-option>
           </ion-select>
           <ion-label>Departure</ion-label>
           <ion-datetime mode="ios" placeholder="Select Date" formControlName="departureDate"  display-timezone="utc"></ion-datetime>
           <ion-label>Return</ion-label>
-          <ion-datetime mode="ios" placeholder="Select Date" formControlName="returnDate" display-timezone="utc"></ion-datetime>
-
-          <ion-button style="margin-top: 1.5rem; text-transform: uppercase" mode="ios" color="primary" type="submit" expand="block">Search</ion-button>
+          <ion-datetime mode="ios" placeholder="Select Date" formControlName="returnDate" display-timezone="utc" ></ion-datetime>
+          <ion-label>Time</ion-label>
+          <ion-datetime displayFormat="HH:mm A"  formControlName="time" placeholder="Select Time"></ion-datetime>
+          <ion-button style="margin-top: 1.5rem; text-transform: uppercase" mode="ios" color="success" type="submit" expand="block">Search</ion-button>
         </ion-card-content>
       </div>
     </form>
-    <div *ngIf="toggle">
-      <ion-card-content >
+    <div >
+      <ion-card-content *ngIf="toggle">
+        <h2 class="ion-text-center">SELECT YOUR PICKUP <br> LOCATION</h2>
+        <hr />
         <ion-select mode="ios" [(ngModel)]="findLocation" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
           <ion-select-option  *ngFor="let i of locations" value="{{i.location}}" >{{i.location}}</ion-select-option>
         </ion-select>
-        <ion-button style="margin-top: 1.5rem; text-transform: uppercase" mode="ios" color="primary" (click)="finalSubmit()" expand="block">Select</ion-button>
+        <ion-button *ngIf="!changeToggle" style="margin-top: 1.5rem; text-transform: uppercase" mode="ios" color="success" (click)="final1Submit()" expand="block">Select</ion-button>
+        <ion-button  *ngIf="changeToggle" style="margin-top: 1.5rem; text-transform: uppercase" mode="ios" color="success" (click)="finalSubmit()" expand="block">Select</ion-button>
       </ion-card-content>
     </div>
 
-<!--    <form (submit)="submit1()">-->
+    <form [formGroup]="form1" (submit)="submit1()">
       <div *ngIf="oneway">
         <div *ngIf="!toggle">
           <ion-card-header  mode="ios" >
@@ -67,28 +71,32 @@
                   <ion-button expand="block" color="light" (click)="bookOneway()">Roundtrip</ion-button>
                 </ion-col>
                 <ion-col size="6">
-                  <ion-button expand="block">Oneway</ion-button>
+                  <ion-button expand="block" color="light" class="button-color">Oneway</ion-button>
                 </ion-col>
               </ion-row>
             </ion-grid>
           </ion-card-header>
           <ion-card-content color="light" >
             <ion-label >From</ion-label>
-            <ion-select mode="ios" [(ngModel)]="departureLocation" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
-              <ion-select-option  *ngFor="let i of results" value="{{i.locations}}" >{{i.locations}}</ion-select-option>
+            <ion-select mode="ios"  formControlName="departureLocation1" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
+              <ion-select-option  *ngFor="let i of results" value="{{i.locationName}}" >{{i.locationName}}</ion-select-option>
             </ion-select>
             <ion-label>To</ion-label>
-            <ion-select mode="ios" [(ngModel)]="destination" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
-              <ion-select-option  *ngFor="let i of results" value="{{i.locations}}" >{{i.locations.accra}}</ion-select-option>
+            <ion-select mode="ios" formControlName="destination1" [(ngModel)]="destination" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
+              <ion-select-option  *ngFor="let i of results" value="{{i.locationName}}" >{{i.locationName}}</ion-select-option>
             </ion-select>
             <ion-label>Departure</ion-label>
-            <ion-datetime mode="ios" presentation="date-time" [(ngModel)]="departureDate" placeholder="Select Date"   display-timezone="utc"></ion-datetime>
-            <ion-button style="margin-top: 1.5rem; text-transform: uppercase" color="primary" (click)="submit1()" type="submit" expand="block">Search</ion-button>
+            <ion-datetime mode="ios" formControlName="departureDate1" presentation="date" [(ngModel)]="departureDate" placeholder="Select Date"   display-timezone="utc"></ion-datetime>
+            <ion-label>Time</ion-label>
+            <ion-datetime  displayFormat="HH:mm A"formControlName="time1" placeholder="Select Time"></ion-datetime>
+
+            <ion-button style="margin-top: 1.5rem; text-transform: uppercase" color="success"   type="submit" expand="block">Search</ion-button>
           </ion-card-content>
         </div>
 
       </div>
-<!--    </form>-->
+    </form>
 
   </ion-card>
+
 </ion-content>

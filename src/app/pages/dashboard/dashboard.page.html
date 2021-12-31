@@ -40,7 +40,7 @@
   <ion-grid class="db-sum">
     <ion-row>
       <ion-col size="6">
-        <ion-card  mode="ios" class="db-card">
+        <ion-card  mode="ios" class="db-card" routerLink="/trip-history">
           <ion-card-content>
             ToTal Trips
           </ion-card-content>
@@ -57,9 +57,9 @@
 
     <ion-row>
       <ion-col size="6">
-        <ion-card  mode="ios" class="db-card" >
+        <ion-card  mode="ios" class="db-card" routerLink="/valid-tickets">
           <ion-card-content>
-            Balance
+            Valid Tickets
           </ion-card-content>
         </ion-card>
       </ion-col>
@@ -72,21 +72,24 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <h2>Booked Trip</h2>
-  <ion-card  mode="ios">
-    <ion-item mode="md">
-      <ion-thumbnail slot="start" class="goal text-center">
-        <ion-icon name="bus" size="meduim" mode="ios"></ion-icon>
-      </ion-thumbnail>
-      <ion-label>
-        <h6 position="stacked">Description</h6>
-        <p position="stacked">Duration</p>
-      </ion-label>
-    </ion-item>
-    <div class="container">
-      <ion-progress-bar color="secondary" value="0.5"></ion-progress-bar>
-      <p slot="start" style="display: inline-block; float: left;">1day</p>
-      <p style="display: inline-block;float: right;">3days</p>
-    </div>
-  </ion-card>
+  <div>
+<!--    <h2>Current Trip</h2>-->
+<!--    <ion-card  mode="ios">-->
+<!--      <ion-item mode="md">-->
+<!--        <ion-thumbnail slot="start" class="goal text-center">-->
+<!--          <ion-icon name="bus" size="meduim" mode="ios"></ion-icon>-->
+<!--        </ion-thumbnail>-->
+<!--        <ion-label>-->
+<!--          <h6 position="stacked">Description</h6>-->
+<!--          <p position="stacked">Duration</p>-->
+<!--        </ion-label>-->
+<!--      </ion-item>-->
+<!--      <div class="container">-->
+<!--        <ion-progress-bar color="success" value="0.5"></ion-progress-bar>-->
+<!--        <p slot="start" style="display: inline-block; float: left;">1day</p>-->
+<!--        <p style="display: inline-block;float: right;">3days</p>-->
+<!--      </div>-->
+<!--    </ion-card>-->
+  </div>
+
 </ion-content>

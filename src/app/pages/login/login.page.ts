@@ -105,7 +105,7 @@ export class LoginPage implements OnInit {
     const pop = await this.alert.create({
       header: 'Please Confirm',
       subHeader: 'Are you sure?',
-      message: 'This will initiate a request to <b>CHANGE or RESET</b> <br/>your <b>PIN CODE</b>. ' +
+      message: 'This will initiate a request to <b> RESET</b> <br/>your <b>PIN CODE</b>. ' +
         '<br/>Do you wish to continue ?',
       cssClass: 'sw-pop',
       backdropDismiss: false,

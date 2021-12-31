@@ -24,8 +24,10 @@ const routes: Routes = [
       { path: 'trips', loadChildren: () => import('./pages/history/history.module').then(m => m.HistoryPageModule) },
       { path: 'notifications', loadChildren: () => import('./pages/loan/loan.module').then(m => m.LoanPageModule) },
       { path: 'track-trip', loadChildren: () => import('./pages/tell-a-friend/tell-a-friend.module').then(m => m.TellAFriendPageModule) },
-      // { path: 'calculator', loadChildren: () => import('./pages/calculator/calculator.module').then(m => m.CalculatorPageModule) },
-      // { path: 'contact', loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactPageModule) },
+      { path: 'trip-history', loadChildren: () => import('./pages/trips/trips-routing.module').then(m => m.TripsPageRoutingModule) },
+      { path: 'valid-tickets',
+        loadChildren: () => import('./pages/valid-tickets/valid-tickets-routing.module').then(m => m.ValidTicketsPageRoutingModule) },
+      { path: 'edit-trip', loadChildren: () => import('./pages/edit-trip/edit-trip-routing.module').then(m => m.EditTripPageRoutingModule) },
       // { path: 'messages', loadChildren: () => import('./pages/messages/messages.module').then(m => m.MessagesPageModule) },
       // { path: 'profile', loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule) },
       // { path: 'change-pin', loadChildren: () => import('./pages/change-pin/change-pin.module').then(m => m.ChangePinPageModule) },
@@ -67,6 +69,10 @@ const routes: Routes = [
     path: 'trips',
     loadChildren: () => import('./pages/history/history.module').then(m => m.HistoryPageModule)
   },
+  { path: 'trip-history',
+    loadChildren: () => import('./pages/trips/trips-routing.module').then(m => m.TripsPageRoutingModule) },
+  { path: 'valid-tickets',
+    loadChildren: () => import('./pages/valid-tickets/valid-tickets-routing.module').then(m => m.ValidTicketsPageRoutingModule) },
   {
     path: 'notifications',
     loadChildren: () => import('./pages/loan/loan.module').then(m => m.LoanPageModule)
@@ -98,6 +104,22 @@ const routes: Routes = [
   {
     path: 'signup',
     loadChildren: () => import('./pages/signup/signup.module').then( m => m.SignupPageModule)
+  },
+  {
+    path: 'trips',
+    loadChildren: () => import('./pages/trips/trips.module').then( m => m.TripsPageModule)
+  },
+  {
+    path: 'valid-tickets',
+    loadChildren: () => import('./pages/valid-tickets/valid-tickets.module').then( m => m.ValidTicketsPageModule)
+  },
+  {
+    path: 'edit-trip',
+    loadChildren: () => import('./pages/edit-trip/edit-trip.module').then( m => m.EditTripPageModule)
+  },
+  {
+    path: 'admin-login',
+    loadChildren: () => import('./pages/admin-login/admin-login.module').then( m => m.AdminLoginPageModule)
   },
 ];
 

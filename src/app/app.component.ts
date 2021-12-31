@@ -13,6 +13,7 @@ import {BannerPage} from './pages/banner/banner.page';
 })
 export class AppComponent {
   currentPageTitle = 'Dashboard';
+  newData: any;
   loginbtn: boolean;
   logoutbtn: boolean;
   appPages = [
@@ -52,6 +53,7 @@ export class AppComponent {
     public modalController: ModalController,
   ) {
     this.initializeApp();
+    this.checkData();
     dataService.getLoggedInName.subscribe(name => this.changeName(name));
     if (this.dataService.isLoggedIn()) {
       console.log('loggedin');
@@ -63,6 +65,13 @@ export class AppComponent {
       this.logoutbtn = false;
     }
 
+  }
+  checkData(){
+    setInterval( ()=>{
+      this.dataService.getMessages().then(async (res) => {
+        this.newData = [res];
+      })
+    }, 2000);
   }
 
   private changeName(name: boolean): void {
@@ -84,6 +93,7 @@ export class AppComponent {
   async presentActionSheet(){
     const actionSheet = await this.actionSheetController.create({
       header: 'Settings',
+      mode:'ios',
       buttons: [
         { text: 'Privacy' },
         { text: 'Security' },

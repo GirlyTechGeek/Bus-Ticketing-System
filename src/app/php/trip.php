@@ -7,25 +7,40 @@ if (isset($postdata) && !empty($postdata)) {
     $request = json_decode($postdata);
     $phpDate = strtotime($departureDate);
     $destination =  trim($request->destination);
-    $departureLocation =  trim($request->departureLocation);
+    $locations =  trim($request->locations);
     $departureDate = trim($request->departureDate);
     $returnDate =  trim($request->returnDate);
     $pickupLocation =  trim($request->pickupLocation);
-
+    $fares =  trim($request->fares);
+    $requestTime =  trim($request->requestTime);
+    $brand =  trim($request->brand);
     $userName =  trim($request->userName);
     $hasPaid =  trim($request->hasPaid);
     try {
-        $query = $writeDB->prepare("INSERT INTO trips (destination,departureLocation,departureDate,returnDate,userName,hasPaid,pickupLocation) VALUES ('$destination','$departureLocation','$departureDate','$returnDate','$userName','$hasPaid','$pickupLocation')");
+
+
+        $query = $writeDB->prepare("INSERT INTO trips (destination,locations,departureDate,returnDate,userName,hasPaid,pickupLocation,fares,requestTime,brand) VALUES ('$destination','$locations','$departureDate','$returnDate','$userName','$hasPaid','$pickupLocation', '$fares', '$requestTime','$brand')");
+
         $query->bindParam("destination", $destination, PDO::PARAM_STR);
-        $query->bindParam("departureLocation", $departureLocation, PDO::PARAM_STR);
+        $query->bindParam("locations", $locations, PDO::PARAM_STR);
         $query->bindParam("departureDate", date('Y-m-d', strtotime($departureDate)) ,PDO::PARAM_STR );
         $query->bindParam("returnDate", date('Y-m-d', strtotime($returnDate)), PDO::PARAM_STR);
         $query->bindParam("userName", $userName, PDO::PARAM_STR);
         $query->bindParam("hasPaid", $hasPaid, PDO::PARAM_STR);
         $query->bindParam("pickupLocation", $pickupLocation, PDO::PARAM_STR);
+        $query->bindParam("fares", $fares, PDO::PARAM_INT);
+        $query->bindParam("requestTime", $requestTime, PDO::PARAM_STR);
+        $query->bindParam("brand", $brand, PDO::PARAM_STR);
         $query->execute();
-        return $writeDB->lastInsertId();
-    } catch (PDOException $e) {
-        exit($e->getMessage());
+
+//         $availableSeats =  $writeDB->prepare("SELECT seats FROM bookings WHERE departureDate = '$departureDate' and locations = '$locations' and destination = '$destination'");
+//         echo json_decode($availableSeats);
+//         $newSeats = $availableSeats - 1;
+//         $query = $writeDB->prepare("UPDATE bookings set seats = 8 where departureDate ='$departureDate' and locations ='$locations' and destination ='$destination'");
+//         $query->execute();
+
+           return $writeDB->lastInsertId();
+        } catch (PDOException $e) {
+          exit($e->getMessage());
+        }
     }
-}
