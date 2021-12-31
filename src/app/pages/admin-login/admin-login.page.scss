@@ -1,0 +1,30 @@
+ion-content{
+  --background: white !important;
+}
+.content-style{
+  padding-top: 20% ;
+}
+.sp-img{
+  padding-top: 20%;
+    animation: up-down 2s ease-in-out infinite alternate-reverse both;
+}
+@media (max-width: 768px) {
+  .content-style{
+    padding-top: 50%;
+    padding-left: 2rem;
+  }
+}
+@media (max-width: 991px) {
+  .content-style{
+    padding-top: 20%;
+    padding-left: 2rem;
+  }
+}
+@keyframes up-down {
+  0% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}

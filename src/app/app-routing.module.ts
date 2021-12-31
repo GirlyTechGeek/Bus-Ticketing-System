@@ -28,8 +28,8 @@ const routes: Routes = [
       { path: 'valid-tickets',
         loadChildren: () => import('./pages/valid-tickets/valid-tickets-routing.module').then(m => m.ValidTicketsPageRoutingModule) },
       { path: 'edit-trip', loadChildren: () => import('./pages/edit-trip/edit-trip-routing.module').then(m => m.EditTripPageRoutingModule) },
-      // { path: 'messages', loadChildren: () => import('./pages/messages/messages.module').then(m => m.MessagesPageModule) },
-      // { path: 'profile', loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule) },
+      { path: 'admin-login', loadChildren: () => import('./pages/admin-login/admin-login-routing.module').then(m => m.AdminLoginPageRoutingModule) },
+      { path: 'admin-dashboard', loadChildren: () => import('./pages/admin-dashboard/admin-dashboard-routing.module').then(m => m.AdminDashboardPageRoutingModule) },
       // { path: 'change-pin', loadChildren: () => import('./pages/change-pin/change-pin.module').then(m => m.ChangePinPageModule) },
       // { path: 'e-statement', loadChildren: () => import('./pages/e-statement/e-statement.module').then(m => m.EStatementPageModule) },
       { path: '', redirectTo: '/u/dashboard', pathMatch: 'full' }
@@ -120,6 +120,10 @@ const routes: Routes = [
   {
     path: 'admin-login',
     loadChildren: () => import('./pages/admin-login/admin-login.module').then( m => m.AdminLoginPageModule)
+  },
+  {
+    path: 'admin-dashboard',
+    loadChildren: () => import('./pages/admin-dashboard/admin-dashboard.module').then( m => m.AdminDashboardPageModule)
   },
 ];
 
