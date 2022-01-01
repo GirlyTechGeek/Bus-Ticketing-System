@@ -34,6 +34,7 @@ export class DepositPage implements OnInit {
   public form: FormGroup;
   public form1: FormGroup;
   public usersName: any;
+  public usersNum: any;
   constructor(
     public modalController: ModalController,
     private loader: LoadingController,
@@ -72,6 +73,7 @@ export class DepositPage implements OnInit {
   ngOnInit() {
     this.ionViewWillEnter();
     this.usersName = localStorage.getItem('user');
+    this.usersNum = localStorage.getItem('number');
 
   }
   // eslint-disable-next-line @typescript-eslint/member-ordering
@@ -140,8 +142,6 @@ export class DepositPage implements OnInit {
         this.loader.dismiss()
         this.notify(`Ooops. There are no available buses to ${this.form.value.destination} . Please try again later.`);
       });
-
-
     });
   }
   async finalSubmit() {
@@ -159,7 +159,8 @@ export class DepositPage implements OnInit {
         this.findLocation,
         this.fares,
         tryDate.split('.')[0].toString(),
-        this.brand
+        this.brand,
+        this.usersNum
       )
         .subscribe(
           async () => {
@@ -275,7 +276,8 @@ export class DepositPage implements OnInit {
         this.findLocation,
         this.fares1,
         tryDate.split('.')[0].toString(),
-        this.brands
+        this.brands,
+        this.usersNum
       )
         .subscribe(
           async () => {

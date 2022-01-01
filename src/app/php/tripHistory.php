@@ -13,7 +13,6 @@ $query = $writeDB->prepare("SELECT returnDate, fares, destination, locations, de
  $query->bindParam("username", $username, PDO::PARAM_STR);
     $query->execute();
 
-
     $rowCount = $query->rowCount();
     if ($rowCount == 0) {
         $response = new Response();

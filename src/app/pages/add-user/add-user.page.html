@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary" style="padding-right: 1.5rem;">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align:center;">Create New User</ion-title>
+    <!-- <img slot="end" class="sw-img" src="/assets/icons/bus.png" alt="dalex-swift" /> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-icon (click)="back()" class="ion-padding" name="return-up-back-outline" size="large"></ion-icon>
+  <ion-card mode="ios" class="container">
+    <form action="register.php" [formGroup]="form" (submit)="submit($event)">
+      <div style="margin: 2rem">
+        <ion-label position="stacked"> Username</ion-label>
+        <ion-input shape="rectangle" class="login-page-input" type="text" name="username" formControlName="username"></ion-input>
+        <ion-label position="stacked">First Name</ion-label>
+        <ion-input shape="rectangle" class="login-page-input" type="text" name="firstName" formControlName="firstName"></ion-input>
+        <ion-label position="stacked">Last Name</ion-label>
+        <ion-input shape="rectangle" class="login-page-input" type="text" name="lastName" formControlName="lastName"></ion-input>
+        <ion-label position="stacked">Phone Number</ion-label>
+        <ion-input shape="rectangle" class="login-page-input" type="tel" name="phoneNumber" formControlName="phoneNumber"></ion-input>
+        <!-- <ion-label position="stacked">PIN</ion-label>
+        <ion-input shape="rectangle" class="login-page-input" type="password"></ion-input> -->
+      </div>
+      <!-- <div style="margin-left: 2rem; margin-right: 2rem;">
+        <ion-button color="secondary" class="login-page-button" expand="block" routerLink="/dashboard">Login</ion-button>
+        <ion-label style="float: right;">Forgot your PIN?</ion-label>
+      </div> -->
+      <div style="margin-top: 3rem; margin: 2rem;">
+        <!-- <ion-label>New Customer?</ion-label> -->
+        <ion-button color="success" mode="ios" class="login-page-button" expand="block" type="submit">Create User</ion-button>
+      </div>
+    </form>
+  </ion-card>
+
+</ion-content>

@@ -6,10 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-dashboard.page.scss'],
 })
 export class AdminDashboardPage implements OnInit {
-
+  username: any;
   constructor() { }
 
   ngOnInit() {
+    this.username = localStorage.getItem('user');
   }
 
 }

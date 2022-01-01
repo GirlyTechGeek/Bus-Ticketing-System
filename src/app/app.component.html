@@ -32,14 +32,13 @@
     </ion-tab-bar>
   </ion-tabs> -->
   <ion-tabs>
-
-    <ion-fab  vertical="bottom" horizontal="center" translucent="true" *ngIf="this.router.url === '/splash' ||this.router.url === '/login' || this.router.url === '/admin-login' || this.router.url === '/signup'? show : !show">
+    <ion-fab  vertical="bottom" horizontal="center" translucent="true" *ngIf="this.router.url === '/splash' ||this.router.url === '/login' || this.router.url === '/admin-login' || this.router.url === '/admin-dashboard'|| this.router.url === '/add-bus'|| this.router.url === '/add-user'|| this.router.url === '/view-buses'|| this.router.url === '/view-user' || this.router.url === '/signup'? show : !show">
       <ion-fab-button mode="ios" routerLink="/dashboard">
         <ion-icon mode="ios" name="add-circle"></ion-icon>
       </ion-fab-button>
     </ion-fab>
 
-    <ion-tab-bar mode="ios" slot="bottom" class="ion-no-border" *ngIf="this.router.url === '/splash' ||this.router.url === '/login' || this.router.url === '/admin-login' || this.router.url === '/signup'? show : !show">
+    <ion-tab-bar mode="ios" slot="bottom" class="ion-no-border" *ngIf="this.router.url === '/splash' ||this.router.url === '/login' || this.router.url === '/admin-login' || this.router.url === '/admin-dashboard'|| this.router.url === '/add-bus'|| this.router.url === '/add-user'|| this.router.url === '/view-buses'|| this.router.url === '/view-user' || this.router.url === '/signup'? show : !show">
 
   <ion-tab-button mode="ios" (click)="presentModal()">
         <ion-icon mode="ios" name="person"></ion-icon>

@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary" style="padding-right: 1.5rem;">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align:center;">Add A Bus</ion-title>
+    <!-- <img slot="end" class="sw-img" src="/assets/icons/bus.png" alt="dalex-swift" /> -->
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <ion-icon (click)="back()" class="ion-padding" name="return-up-back-outline" size="large"></ion-icon>
+  <ion-card mode="ios" class="container ion-padding">
+    <form [formGroup]="form" (submit)="submit()">
+      <ion-label>Driver's Name</ion-label>
+      <ion-input type="text" formControlName="driver" mode="ios" placeholder="Drivers name"></ion-input>
+      <ion-label>Phone Number</ion-label>
+      <ion-input type="tel" formControlName="phoneNumber" mode="ios" placeholder="Drivers name"></ion-input>
+      <ion-label>Location</ion-label>
+      <ion-input type="text" formControlName="locations" mode="ios" placeholder="Departure Location"></ion-input>
+      <ion-label>Destination</ion-label>
+      <ion-input formControlName="destination" mode="ios" placeholder="Destination"></ion-input>
+      <ion-label>Departure Date</ion-label>
+      <ion-datetime mode="ios" formControlName="departureDate" placeholder="Select departure date"  display-timezone="utc" ></ion-datetime>
+      <ion-label>Return Date</ion-label>
+      <ion-datetime mode="ios" formControlName="returnDate" placeholder="Select return date"  display-timezone="utc" ></ion-datetime>
+      <ion-row>
+        <ion-col>
+          <ion-label>Fare</ion-label>
+          <ion-input type="text" formControlName="fare" placeholder="Fare"></ion-input>
+        </ion-col>
+        <ion-col>
+          <ion-label>Seats</ion-label>
+          <ion-input type="num" formControlName="seats" placeholder="Seats available"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-label>Brand</ion-label>
+      <ion-input type="text" formControlName="brand" placeholder="Brand name"></ion-input>
+      <ion-button color="success" class="mt-3" expand="block" mode="ios" type="submit">Add Bus</ion-button>
+    </form>
+
+  </ion-card>
+</ion-content>

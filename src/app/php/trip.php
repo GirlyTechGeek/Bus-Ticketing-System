@@ -16,10 +16,11 @@ if (isset($postdata) && !empty($postdata)) {
     $brand =  trim($request->brand);
     $userName =  trim($request->userName);
     $hasPaid =  trim($request->hasPaid);
+    $phoneNumber =  trim($request->phoneNumber);
     try {
 
 
-        $query = $writeDB->prepare("INSERT INTO trips (destination,locations,departureDate,returnDate,userName,hasPaid,pickupLocation,fares,requestTime,brand) VALUES ('$destination','$locations','$departureDate','$returnDate','$userName','$hasPaid','$pickupLocation', '$fares', '$requestTime','$brand')");
+        $query = $writeDB->prepare("INSERT INTO trips (destination,locations,departureDate,returnDate,userName,hasPaid,pickupLocation,fares,requestTime,brand,phoneNumber) VALUES ('$destination','$locations','$departureDate','$returnDate','$userName','$hasPaid','$pickupLocation', '$fares', '$requestTime','$brand','$phoneNumber')");
 
         $query->bindParam("destination", $destination, PDO::PARAM_STR);
         $query->bindParam("locations", $locations, PDO::PARAM_STR);
@@ -31,6 +32,7 @@ if (isset($postdata) && !empty($postdata)) {
         $query->bindParam("fares", $fares, PDO::PARAM_INT);
         $query->bindParam("requestTime", $requestTime, PDO::PARAM_STR);
         $query->bindParam("brand", $brand, PDO::PARAM_STR);
+        $query->bindParam("phoneNumber", $phoneNumber, PDO::PARAM_STR);
         $query->execute();
 
 //         $availableSeats =  $writeDB->prepare("SELECT seats FROM bookings WHERE departureDate = '$departureDate' and locations = '$locations' and destination = '$destination'");

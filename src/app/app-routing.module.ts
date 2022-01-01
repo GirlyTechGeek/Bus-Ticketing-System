@@ -30,8 +30,9 @@ const routes: Routes = [
       { path: 'edit-trip', loadChildren: () => import('./pages/edit-trip/edit-trip-routing.module').then(m => m.EditTripPageRoutingModule) },
       { path: 'admin-login', loadChildren: () => import('./pages/admin-login/admin-login-routing.module').then(m => m.AdminLoginPageRoutingModule) },
       { path: 'admin-dashboard', loadChildren: () => import('./pages/admin-dashboard/admin-dashboard-routing.module').then(m => m.AdminDashboardPageRoutingModule) },
-      // { path: 'change-pin', loadChildren: () => import('./pages/change-pin/change-pin.module').then(m => m.ChangePinPageModule) },
-      // { path: 'e-statement', loadChildren: () => import('./pages/e-statement/e-statement.module').then(m => m.EStatementPageModule) },
+      { path: 'add-buses', loadChildren: () => import('./pages/add-bus/add-bus-routing.module').then(m => m.AddBusPageRoutingModule) },
+      { path: 'users', loadChildren: () => import('./pages/view-user/view-user-routing.module').then(m => m.ViewUserPageRoutingModule) },
+      { path: 'add-user', loadChildren: () => import('./pages/add-user/add-user-routing.module').then(m => m.AddUserPageRoutingModule) },
       { path: '', redirectTo: '/u/dashboard', pathMatch: 'full' }
     ],
     // canActivate: [GuardService],
@@ -124,6 +125,22 @@ const routes: Routes = [
   {
     path: 'admin-dashboard',
     loadChildren: () => import('./pages/admin-dashboard/admin-dashboard.module').then( m => m.AdminDashboardPageModule)
+  },
+  {
+    path: 'view-user',
+    loadChildren: () => import('./pages/view-user/view-user.module').then( m => m.ViewUserPageModule)
+  },
+  {
+    path: 'add-user',
+    loadChildren: () => import('./pages/add-user/add-user.module').then( m => m.AddUserPageModule)
+  },
+  {
+    path: 'add-bus',
+    loadChildren: () => import('./pages/add-bus/add-bus.module').then( m => m.AddBusPageModule)
+  },
+  {
+    path: 'view-buses',
+    loadChildren: () => import('./pages/view-buses/view-buses.module').then( m => m.ViewBusesPageModule)
   },
 ];
 

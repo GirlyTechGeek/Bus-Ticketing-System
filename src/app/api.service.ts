@@ -30,8 +30,8 @@ export class ApiService {
     return this.httpClient.post<any>(this.baseUrl + '/updateProfile.php', { firstName, lastName,userName, phoneNumber })
       .pipe(map(Users => Users));
   }
-  public bookTrip(destination: any,locations: any,departureDate: any,returnDate: any,userName: any,hasPaid: any,pickupLocation: any, fares: any, requestTime: any, brand: any) {
-    return this.httpClient.post<any>(this.baseUrl + '/trip.php', { destination,locations,departureDate,returnDate,userName,hasPaid, pickupLocation, fares,requestTime, brand })
+  public bookTrip(destination: any,locations: any,departureDate: any,returnDate: any,userName: any,hasPaid: any,pickupLocation: any, fares: any, requestTime: any, brand: any,phoneNumber: any) {
+    return this.httpClient.post<any>(this.baseUrl + '/trip.php', { destination,locations,departureDate,returnDate,userName,hasPaid, pickupLocation, fares,requestTime, brand, phoneNumber })
       .pipe(map(Users => Users));
   }
   public editTrip(destination: any,locations: any,departureDate: any,returnDate: any,userName: any,hasPaid: any,pickupLocation: any, fares: any, requestTime: any, brand: any,tripID: any) {
@@ -42,8 +42,16 @@ export class ApiService {
     return this.httpClient.post<any>(this.baseUrl + '/delete-trip.php', {  tripID })
       .pipe(map(Users => Users));
   }
+  public deleteBus(bookingID: any) {
+    return this.httpClient.post<any>(this.baseUrl + '/deleteBus.php', {bookingID })
+      .pipe(map(Users => Users));
+  }
   public bookOneWayTrip(destination: any,departureLocation: any,departureDate: any, userName: any,hasPaid: any,pickupLocation: any ) {
     return this.httpClient.post<any>(this.baseUrl + '/trip.php', { destination,departureLocation,departureDate,userName,hasPaid,pickupLocation })
+      .pipe(map(Users => Users));
+  }
+  public getBus(driver: any,returnDate: any,departureDate: any, locations: any,fare: any,destination: any, seats:any ,brand:any ,phoneNumber:any ) {
+    return this.httpClient.post<any>(this.baseUrl + '/addBuses.php', { driver,returnDate,departureDate,locations,fare,destination,seats,brand,phoneNumber })
       .pipe(map(Users => Users));
   }
   public requestPin(phoneNumber: any, pin: any) {
@@ -61,6 +69,12 @@ export class ApiService {
   }
   public getTrips(username: any) {
     return this.httpClient.post(this.baseUrl + '/tripHistory.php', {username});
+  }
+  public getAdminTrips() {
+    return this.httpClient.get(this.baseUrl + '/tripsAdmin.php', );
+  }
+  public getBuses() {
+    return this.httpClient.get(this.baseUrl + '/buses.php', );
   }
   public getAvailability(destination: any, departureDate: any ) {
     return this.httpClient.post(this.baseUrl + '/availability.php', {destination, departureDate})
