@@ -13,6 +13,7 @@ import * as XLSX from "xlsx";
 export class ViewBusesPage implements OnInit {
   tripResults: any;
   private busy: any;
+  public username: any;
 
   constructor(
     private dataService: ApiService,
@@ -25,6 +26,7 @@ export class ViewBusesPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.username = localStorage.getItem('adminUser');
   }
   ionViewWillEnter = () => {
     this.freeze().then(async () => {

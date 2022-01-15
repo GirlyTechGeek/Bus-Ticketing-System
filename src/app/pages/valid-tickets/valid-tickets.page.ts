@@ -14,6 +14,7 @@ export class ValidTicketsPage implements OnInit {
   tripResults: any;
   dateChecker: any = new Date();
   private busy: any;
+  public username: any;
   tripId: any;
   constructor(
     private dataService: ApiService,
@@ -25,7 +26,7 @@ export class ValidTicketsPage implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.username = localStorage.getItem('adminUser');
   }
 
   ionViewWillEnter = () => {

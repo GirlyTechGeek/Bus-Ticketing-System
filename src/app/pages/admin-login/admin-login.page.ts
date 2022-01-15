@@ -12,6 +12,7 @@ import {Router} from '@angular/router';
 export class AdminLoginPage implements OnInit {
   form: FormGroup;
   private busy: any;
+  public usr: any;
   constructor(
     private fb: FormBuilder,
     private dataService: ApiService,
@@ -26,6 +27,7 @@ export class AdminLoginPage implements OnInit {
   }
 
   ngOnInit() {
+    localStorage.clear();
   }
 
   submit() {
@@ -33,8 +35,9 @@ export class AdminLoginPage implements OnInit {
       await this.dataService.userlogin(this.form.value.phoneNumber, this.form.value.pin)
         .subscribe(
           async (res) => {
+            this.usr = res[0].userName;
             this.form.reset();
-            // localStorage.setItem('response',JSON.stringify(res) );
+            localStorage.setItem('adminUser',this.usr);
             const redirect = this.dataService.redirectUrl ? this.dataService.redirectUrl : '/admin-dashboard';
             await this.router.navigate([redirect]);
             await this.loader.dismiss();

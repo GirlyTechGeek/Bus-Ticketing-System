@@ -13,7 +13,11 @@ import {Router} from '@angular/router';
 export class AddBusPage implements OnInit {
   public form: FormGroup;
   private busy: any;
-  username:any;
+  username: any;
+  administrator: any;
+  stcApproved = false;
+  vipApproved = false;
+  vvipApproved = false;
   constructor(
     private location: LocationStrategy,
     private loader: LoadingController,
@@ -36,12 +40,23 @@ export class AddBusPage implements OnInit {
   }
 
   ngOnInit() {
-    this.username = localStorage.getItem('user');
+    this.username = localStorage.getItem('adminUser');
+    this.administrator = localStorage.getItem('adminUser');
+    if(this.administrator.includes('stc')){
+      this.stcApproved = true;
+    }
+    if(this.administrator.includes('vip')){
+      this.vipApproved = true;
+    }
+    if(this.administrator.includes('vvip')){
+      this.vvipApproved = true;
+    }
   }
 
   back(){
     this.location.back();
   }
+
   async submit() {
     return this.freeze().then(async () => {
       await this.dataService.getBus(

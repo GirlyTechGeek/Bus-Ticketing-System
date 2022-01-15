@@ -20,7 +20,7 @@ export class AdminDashboardPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.username = localStorage.getItem('user');
+    this.username = localStorage.getItem('adminUser');
     this.phoneNumber = localStorage.getItem('number');
   }
 

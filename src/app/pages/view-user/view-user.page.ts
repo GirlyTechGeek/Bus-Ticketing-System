@@ -27,7 +27,7 @@ export class ViewUserPage implements OnInit {
   }
 
   ngOnInit() {
-    this.username = localStorage.getItem('user');
+    this.username = localStorage.getItem('adminUser');
   }
   deleteRecord(ID: any){
     this.freeze().then(async () => {

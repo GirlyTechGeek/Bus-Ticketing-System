@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {AlertController, LoadingController, MenuController} from "@ionic/angular";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ApiService} from "../../api.service";
-import {LocationStrategy} from "@angular/common";
+import {AlertController, LoadingController, MenuController} from '@ionic/angular';
+import {ActivatedRoute, Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ApiService} from '../../api.service';
+import {LocationStrategy} from '@angular/common';
 
 @Component({
   selector: 'app-add-user',
@@ -12,6 +12,7 @@ import {LocationStrategy} from "@angular/common";
 })
 export class AddUserPage implements OnInit {
   private busy: any;
+  public username: any;
   pin: any;
   public form: FormGroup;
 
@@ -36,6 +37,7 @@ export class AddUserPage implements OnInit {
   }
 
   ngOnInit() {
+    this.username = localStorage.getItem('adminUser');
   }
   generatePin(): string {
     return Math.floor(1000 + Math.random() * 9000).toString();
@@ -45,12 +47,12 @@ export class AddUserPage implements OnInit {
   }
   async submit() {
     const pin = this.generatePin();
-    this.pin = pin
+    this.pin = pin;
     const msg = `Your pin is ${this.pin}`;
     return this.freeze().then(async () => {
       this.form.patchValue({
         pin: this.pin
-      })
+      });
       await this.dataService.userregistration(this.form.value.username,this.form.value.firstName, this.form.value.lastName, this.form.value.pin, this.form.value.phoneNumber)
         .subscribe(async () => {
             this.notify(msg);
@@ -59,8 +61,8 @@ export class AddUserPage implements OnInit {
             this.router.navigate([redirect]);
           },
           (err: any) => {
-            console.log(err)
-            this.loader.dismiss()
+            console.log(err);
+            this.loader.dismiss();
             return this.notify('Ooops. Unable to complete your Request. Please try again.');
             // alert("User name or password is incorrect")
           });
@@ -68,10 +70,10 @@ export class AddUserPage implements OnInit {
   }
   async submits() {
     const pin = this.generatePin();
-    this.pin = pin
+    this.pin = pin;
     const msg = `Your pin is ${this.pin}`;
-    return this.freeze().then(() => {
-      return this.notify(msg);
+    return this.freeze().then(() =>
+       this.notify(msg)
       // if (this.form.valid) {
       //     // @ts-ignore
       //     if (res.phone != null && res.phone !== '') {
@@ -88,7 +90,7 @@ export class AddUserPage implements OnInit {
       //       });
       //     } else { }
       // }
-    });
+    );
   }
   // freeze ui
   async freeze() {
