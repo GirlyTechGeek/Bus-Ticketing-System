@@ -56,8 +56,27 @@ export class ValidTicketsPage implements OnInit {
         ID
       ).subscribe(async (res) =>{
         await this.loader.dismiss();
-        this.notify('Record deleted successfully');
-        this.ionViewWillEnter();
+          const pop1 = await this.alert.create({
+            header: 'Confirmation',
+            subHeader: 'Delete Record',
+            message: 'This record will be permanently deleted',
+            cssClass: 'sw-pop',
+            backdropDismiss: false,
+            mode: 'ios',
+            buttons: [
+              {text: 'Cancel', role: 'cancel'},
+              {
+                text: 'Confirm',
+                role: 'confirm',
+                handler: async (data) =>{
+                  this.notify('Record deleted successfully');
+                  this.ionViewWillEnter();
+                }
+              }
+            ]
+          });
+          await pop1.present();
+
       },
       (err: any) => {
         console.log(err)

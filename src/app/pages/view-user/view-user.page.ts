@@ -12,6 +12,7 @@ import * as XLSX from 'xlsx';
 export class ViewUserPage implements OnInit {
   tripResults: any;
   private busy: any;
+  username:any;
   private fileName: 'travellers';
 
   constructor(
@@ -26,6 +27,7 @@ export class ViewUserPage implements OnInit {
   }
 
   ngOnInit() {
+    this.username = localStorage.getItem('user');
   }
   deleteRecord(ID: any){
     this.freeze().then(async () => {

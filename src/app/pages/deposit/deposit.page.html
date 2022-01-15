@@ -11,6 +11,15 @@
 <ion-content fullscreen>
   <div class="grad"></div>
   <ion-card  mode="ios" class="main" color="light">
+<!--    <button-->
+<!--      angular4-paystack-->
+<!--      [paystackOptions]="options"-->
+<!--      (paymentInit)="paymentInit()"-->
+<!--      (onClose)="paymentCancel()"-->
+<!--      (callback)="paymentDone($event)"-->
+<!--    >-->
+<!--      Pay with Paystack-->
+<!--    </button>-->
     <form [formGroup]="form" (submit)="submit()"  *ngIf="!oneway">
       <div *ngIf="!toggle">
         <ion-card-header  mode="ios" >
@@ -50,14 +59,26 @@
       </div>
     </form>
     <div >
-      <ion-card-content *ngIf="toggle">
-        <h2 class="ion-text-center">SELECT YOUR PICKUP <br> LOCATION</h2>
-        <hr />
-        <ion-select mode="ios" [(ngModel)]="findLocation" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
-          <ion-select-option  *ngFor="let i of locations" value="{{i.location}}" >{{i.location}}</ion-select-option>
-        </ion-select>
-        <ion-button *ngIf="!changeToggle" style="margin-top: 1.5rem; text-transform: uppercase" mode="ios" color="success" (click)="final1Submit()" expand="block">Select</ion-button>
-        <ion-button  *ngIf="changeToggle" style="margin-top: 1.5rem; text-transform: uppercase" mode="ios" color="success" (click)="finalSubmit()" expand="block">Select</ion-button>
+      <ion-card-content *ngIf="toggle" >
+        <div *ngIf="!changePayment">
+          <h2 class="ion-text-center">SELECT YOUR PICKUP <br> LOCATION</h2>
+          <hr />
+          <ion-select mode="ios" [(ngModel)]="findLocation" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
+            <ion-select-option  *ngFor="let i of locations" value="{{i.location}}" >{{i.location}}</ion-select-option>
+          </ion-select>
+          <ion-button *ngIf="!changeToggle" style="margin-top: 1.5rem; text-transform: uppercase" mode="ios" color="success" (click)="final1Submit()" expand="block">Select</ion-button>
+          <ion-button  *ngIf="changeToggle" style="margin-top: 1.5rem; text-transform: uppercase" mode="ios" color="success" (click)="finalSubmit()" expand="block">Select</ion-button>
+        </div>
+
+        <div *ngIf="payment">
+          <div *ngIf="changePayment">
+            <h2 class="ion-text-center">TRIP CONFIRMATION PAY <br> {{fares}}{{fares1}} GH₵</h2>
+            <hr />
+
+            <ion-button angular4-paystack [paystackOptions]="options" expand="block" color="success" (paymentInit)="paymentInit()" (onClose)="paymentCancel()" (callback)="paymentDone($event)" (click)="freeze()">Pay</ion-button>
+          </div>
+
+        </div>
       </ion-card-content>
     </div>
 

@@ -1,8 +1,8 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Users } from './models/users';
-import { environment } from '../environments/environment'
+import { environment } from '../environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -46,11 +46,15 @@ export class ApiService {
     return this.httpClient.post<any>(this.baseUrl + '/deleteBus.php', {bookingID })
       .pipe(map(Users => Users));
   }
+  public makePayment(amount: any, email: any, currency: any, mobile_money: any){
+      const head = new HttpHeaders({'content-Type':'application/json', authorization: 'Bearer sk_test_bbe45b85dfeb1a8f7c4f736022d63945f919aae2'});
+      return this.httpClient.post<any>('https://api.paystack.co/charge', {amount, email, currency, mobile_money}, {headers: head} );
+  }
   public bookOneWayTrip(destination: any,departureLocation: any,departureDate: any, userName: any,hasPaid: any,pickupLocation: any ) {
     return this.httpClient.post<any>(this.baseUrl + '/trip.php', { destination,departureLocation,departureDate,userName,hasPaid,pickupLocation })
       .pipe(map(Users => Users));
   }
-  public getBus(driver: any,returnDate: any,departureDate: any, locations: any,fare: any,destination: any, seats:any ,brand:any ,phoneNumber:any ) {
+  public getBus(driver: any,returnDate: any,departureDate: any, locations: any,fare: any,destination: any, seats: any ,brand: any ,phoneNumber: any ) {
     return this.httpClient.post<any>(this.baseUrl + '/addBuses.php', { driver,returnDate,departureDate,locations,fare,destination,seats,brand,phoneNumber })
       .pipe(map(Users => Users));
   }
@@ -77,7 +81,7 @@ export class ApiService {
     return this.httpClient.get(this.baseUrl + '/buses.php', );
   }
   public getAvailability(destination: any, departureDate: any ) {
-    return this.httpClient.post(this.baseUrl + '/availability.php', {destination, departureDate})
+    return this.httpClient.post(this.baseUrl + '/availability.php', {destination, departureDate});
   }
     //token
     setToken(token: string) {
@@ -93,7 +97,7 @@ export class ApiService {
     isLoggedIn() {
         const usertoken = this.getToken();
         if (usertoken != null) {
-            return true
+            return true;
         }
         return false;
     }

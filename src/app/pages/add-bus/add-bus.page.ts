@@ -13,6 +13,7 @@ import {Router} from '@angular/router';
 export class AddBusPage implements OnInit {
   public form: FormGroup;
   private busy: any;
+  username:any;
   constructor(
     private location: LocationStrategy,
     private loader: LoadingController,
@@ -35,6 +36,7 @@ export class AddBusPage implements OnInit {
   }
 
   ngOnInit() {
+    this.username = localStorage.getItem('user');
   }
 
   back(){

@@ -72,24 +72,24 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <div>
-<!--    <h2>Current Trip</h2>-->
-<!--    <ion-card  mode="ios">-->
-<!--      <ion-item mode="md">-->
-<!--        <ion-thumbnail slot="start" class="goal text-center">-->
-<!--          <ion-icon name="bus" size="meduim" mode="ios"></ion-icon>-->
-<!--        </ion-thumbnail>-->
-<!--        <ion-label>-->
-<!--          <h6 position="stacked">Description</h6>-->
-<!--          <p position="stacked">Duration</p>-->
-<!--        </ion-label>-->
-<!--      </ion-item>-->
-<!--      <div class="container">-->
-<!--        <ion-progress-bar color="success" value="0.5"></ion-progress-bar>-->
-<!--        <p slot="start" style="display: inline-block; float: left;">1day</p>-->
-<!--        <p style="display: inline-block;float: right;">3days</p>-->
-<!--      </div>-->
-<!--    </ion-card>-->
+  <h2>Current Trip</h2>
+  <div  *ngFor="let i of tripResults">
+    <ion-card  mode="ios" *ngIf="i.returnDate >= dateChecker">
+      <ion-item mode="md">
+        <ion-thumbnail slot="start" class="goal text-center">
+          <ion-icon name="bus" size="meduim" mode="ios"></ion-icon>
+        </ion-thumbnail>
+        <ion-label>
+          <h6 position="stacked">{{i.locations}}</h6>
+          <p position="stacked">{{i.destination}}</p>
+        </ion-label>
+      </ion-item>
+      <div class="container">
+        <ion-progress-bar color="success" value="1"></ion-progress-bar>
+        <p slot="start" style="display: inline-block; float: left;">{{i.departureDate}}</p>
+        <p style="display: inline-block;float: right;">{{i.retunrDate}}</p>
+      </div>
+    </ion-card>
   </div>
 
 </ion-content>

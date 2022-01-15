@@ -6,6 +6,7 @@ import {ActionSheetController, Platform, ModalController} from '@ionic/angular';
 import { ApiService } from './api.service';
 import {BannerPage} from './pages/banner/banner.page';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',

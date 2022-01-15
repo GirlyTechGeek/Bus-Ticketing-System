@@ -3,7 +3,9 @@ import {ApiService} from '../../api.service';
 import {AlertController, LoadingController, ModalController} from '@ionic/angular';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
-import {LocationStrategy} from "@angular/common";
+import {LocationStrategy} from '@angular/common';
+import {PaystackOptions} from 'angular4-paystack';
+
 
 @Component({
   selector: 'app-deposit',
@@ -13,12 +15,22 @@ import {LocationStrategy} from "@angular/common";
 export class DepositPage implements OnInit {
   oneway = false;
   results: any ;
+  title: any;
   brands: any;
   brand: any;
   findLocation: any;
   fares: any;
   fares1: any;
+  to = localStorage.getItem('fare');
+  options: PaystackOptions = {
+    amount: parseInt(this.to, 2),
+    email: 'asunkaa41@gmail.com',
+    ref: `${Math.ceil(Math.random() * 10e10)}`,
+    currency: 'GHS',
+  };
   public toggle = false;
+  public payment = false;
+  public changePayment = false;
   public changeToggle = false;
   public locations =[
         {id: 1, location: 'accra'},
@@ -35,6 +47,7 @@ export class DepositPage implements OnInit {
   public form1: FormGroup;
   public usersName: any;
   public usersNum: any;
+
   constructor(
     public modalController: ModalController,
     private loader: LoadingController,
@@ -87,9 +100,24 @@ export class DepositPage implements OnInit {
         this.results = res;
         console.log(res);
       }
-    )
+    );
     // }, 20000);
   };
+
+  paymentInit() {
+    console.log('Payment initialized');
+  }
+
+  paymentDone(ref: any) {
+    this.title = 'Payment successfull';
+    console.log(this.title, ref);
+    this.loader.dismiss();
+  }
+
+  paymentCancel() {
+    console.log('payment failed');
+    this.loader.dismiss();
+  }
   bookOneway(){
     this.oneway = !this.oneway;
   }
@@ -115,6 +143,7 @@ export class DepositPage implements OnInit {
       this.fares = this.results[0].fare;
       this.brand = this.results[0].brand;
       localStorage.setItem('seats', this.results[0].seats);
+      localStorage.setItem('fare', this.results[0].fare);
       await this.loader.dismiss();
       const pop = await this.alert.create({
         header: 'Confirmation',
@@ -138,17 +167,18 @@ export class DepositPage implements OnInit {
       });
       await pop.present();
     },(err: any) => {
-        console.log(err)
-        this.loader.dismiss()
+        console.log(err);
+        this.loader.dismiss();
         this.notify(`Ooops. There are no available buses to ${this.form.value.destination} . Please try again later.`);
       });
     });
   }
+
   async finalSubmit() {
-    return this.freeze().then(async () => {
+    // return this.freeze().then(async () => {
       const newSeat = localStorage.getItem('seats');
-      console.log(newSeat)
-      const tryDate = this.form.value.time.split('T')[1]
+      console.log(newSeat);
+      const tryDate = this.form.value.time.split('T')[1];
       await this.dataService.bookTrip(
         this.form.value.destination,
         this.form.value.departureLocation,
@@ -164,11 +194,11 @@ export class DepositPage implements OnInit {
       )
         .subscribe(
           async () => {
-              await this.loader.dismiss()
+              // await this.loader.dismiss()
               const pop1 = await this.alert.create({
                 header: 'Confirmation',
-                subHeader: 'Buses available',
-                message: 'Please continue to submit your travel request',
+                subHeader: 'Payment Option',
+                message: 'Please confirm to pay for your travels',
                 cssClass: 'sw-pop',
                 backdropDismiss: false,
                 mode: 'ios',
@@ -177,20 +207,25 @@ export class DepositPage implements OnInit {
                   {
                     text: 'Confirm',
                     role: 'confirm',
+                    handler: async () =>{
+                      this.payment = true;
+                      this.changePayment = true;
+                      }
                   }
                 ]
               });
               await pop1.present();
-              this.bookOneway();
+              // this.bookOneway();
+            // this.loader.dismiss()
           },
           (err: any) => {
-            console.log(err)
-            this.loader.dismiss()
+            console.log(err);
+            // this.loader.dismiss()
             this.notify(`Ooops. Unable to complete your Request. Please try again.`);
           }
         );
-      this.location.back()
-    });
+      // this.location.back();
+    // });
   }
   submit1() {
     // const msg = 'You have successfully updated your profile';
@@ -225,8 +260,8 @@ export class DepositPage implements OnInit {
         });
         await pop.present();
       },(err: any) => {
-        console.log(err)
-        this.loader.dismiss()
+        console.log(err);
+        this.loader.dismiss();
         this.notify(`Ooops. There are no available buses to ${this.form.value.destination} . Please try again later.`);
       });
 
@@ -263,9 +298,24 @@ export class DepositPage implements OnInit {
     //       });
     // });
   }
+  // async payment(){
+  //   const mobile_money = {
+  //     phone: '0551234987',
+  //     provider: 'mtn'
+  //   }
+  //   await this.dataService.makePayment(
+  //     300,
+  //     'asunkaa41@gmail.com',
+  //     'GHS',
+  //     mobile_money,
+  //   ).toPromise();
+  // }
+pay(){
+    this.payment = !this.payment;
+}
   async final1Submit() {
-    return this.freeze().then(async () => {
-      const tryDate = this.form.value.time.split('T')[1]
+    // return this.freeze().then(async () => {
+      const tryDate = this.form1.value.time1.split('T')[1];
       await this.dataService.bookTrip(
         this.form1.value.destination1,
         this.form1.value.departureLocation1,
@@ -281,11 +331,11 @@ export class DepositPage implements OnInit {
       )
         .subscribe(
           async () => {
-            await this.loader.dismiss()
+            // await this.loader.dismiss()
             const pop1 = await this.alert.create({
               header: 'Confirmation',
-              subHeader: 'Buses available',
-              message: 'Please continue to submit your travel request',
+              subHeader: 'Payment Options',
+              message: 'Please continue to pay for your travel',
               cssClass: 'sw-pop',
               backdropDismiss: false,
               mode: 'ios',
@@ -294,23 +344,26 @@ export class DepositPage implements OnInit {
                 {
                   text: 'Confirm',
                   role: 'confirm',
-                  handler: async (data) =>{
-                    this.notify('Trip booked successfully. Continue to view boarding ticket');
+                  handler: async () =>{
+                    this.changePayment = true;
+                    this.payment = true
                   }
+
                 }
               ]
             });
             await pop1.present();
-            this.bookOneway();
+            // this.bookOneway();
+            // await this.loader.dismiss()
           },
           (err: any) => {
-            console.log(err)
-            this.loader.dismiss()
+            console.log(err);
+            // this.loader.dismiss()
             this.notify(`Ooops. Unable to complete your Request. Please try again.`);
           }
         );
-      this.location.back()
-    });
+      // this.location.back();
+    // });
   }
 
   // show alert

@@ -1,8 +1,12 @@
 ion-content{
-  --background: white !important;
+  --background: white   !important ;
 }
+//ion-content div{
+//  background-image: ;
+//  background-repeat: repeat;
+//}
 .content-style{
-  padding-top: 20% ;
+  padding-top: 17% ;
 }
 .sp-img{
   padding-top: 20%;
@@ -27,4 +31,12 @@ ion-content{
   100% {
     transform: translateY(-10px);
   }
+}
+h1{
+  color: #0A3A50;
+  font-weight: bolder;
+}
+p{
+  font-size:11px;
+  color: rgb(63, 63, 63);
 }
