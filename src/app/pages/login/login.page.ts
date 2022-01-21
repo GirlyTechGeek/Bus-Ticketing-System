@@ -45,7 +45,7 @@ export class LoginPage implements OnInit {
     this.toggleScreen = !this.toggleScreen;
   }
   ngOnInit() {
-     localStorage.removeItem('token');
+    localStorage.clear();
   }
   submit() {
     return this.freeze().then(async () => {
