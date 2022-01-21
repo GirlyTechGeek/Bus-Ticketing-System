@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="primary" style="padding-right: 1.5rem;">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align:center;">Booked Travellers</ion-title>
+    <!-- <img slot="end" class="sw-img" src="/assets/icons/bus.png" alt="dalex-swift" /> -->
+    <ion-avatar slot="end">
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-avatar>
+    <ion-label slot="end" class="ion-text-left">
+      <h3>{{username}}</h3>
+      <small>Online</small>
+    </ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-icon (click)="back()" class="ion-padding" name="return-up-back-outline" size="large"></ion-icon>
+<ion-card mode="ios">
+  <ion-card-header>
+    <ion-button color="primary" mode="ios" style="float: right; padding-bottom: 5px" (click)="exportExcel()">Export to Excel </ion-button>
+  </ion-card-header>
+  <ion-card-content>
+    <table class="table table-bordered" id="excel-table">
+      <thead>
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Phone Number</th>
+        <th scope="col">Destination</th>
+        <th scope="col">Departure Date</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody *ngFor="let i of tripResults">
+      <tr>
+        <th>{{i.username}}</th>
+        <td>{{i.phoneNumber}}</td>
+        <td>{{i.destination}}</td>
+        <td>{{i.departureDate | date}}</td>
+        <td>
+          <ion-row>
+            <ion-col>
+              <ion-button mode="ios" color="success" expand="block">EDIT</ion-button>
+            </ion-col>
+            <ion-col>
+              <ion-button mode="ios" color="danger" expand="block" (click)="deleteRecord(i.tripID)">DELETE</ion-button>
+            </ion-col>
+          </ion-row>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </ion-card-content>
+</ion-card>
+</ion-content>

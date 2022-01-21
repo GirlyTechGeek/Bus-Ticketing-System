@@ -7,15 +7,18 @@
     <p>Please Sign Up to creat an account.</p>
   </div>
   <div>
+    <form action="register.php" [formGroup]="form" (submit)="submit($event)">
     <div style="margin: 2rem">
+      <ion-label position="stacked"> Username</ion-label>
+      <ion-input shape="rectangle" class="login-page-input" type="text" name="username" formControlName="username"></ion-input>
       <ion-label position="stacked">First Name</ion-label>
-      <ion-input shape="rectangle" class="login-page-input" type="tel"></ion-input>
+      <ion-input shape="rectangle" class="login-page-input" type="text" name="firstName" formControlName="firstName"></ion-input>
       <ion-label position="stacked">Last Name</ion-label>
-      <ion-input shape="rectangle" class="login-page-input" type="tel"></ion-input>
+      <ion-input shape="rectangle" class="login-page-input" type="text" name="lastName" formControlName="lastName"></ion-input>
       <ion-label position="stacked">Phone Number</ion-label>
-      <ion-input shape="rectangle" class="login-page-input" type="tel"></ion-input>
-      <ion-label position="stacked">PIN</ion-label>
-      <ion-input shape="rectangle" class="login-page-input" type="password"></ion-input>
+      <ion-input shape="rectangle" class="login-page-input" type="tel" name="phoneNumber" formControlName="phoneNumber"></ion-input>
+      <!-- <ion-label position="stacked">PIN</ion-label>
+      <ion-input shape="rectangle" class="login-page-input" type="password"></ion-input> -->
     </div>
     <!-- <div style="margin-left: 2rem; margin-right: 2rem;">
       <ion-button color="secondary" class="login-page-button" expand="block" routerLink="/dashboard">Login</ion-button>
@@ -23,8 +26,9 @@
     </div> -->
     <div style="margin-top: 3rem; margin: 2rem;">
       <!-- <ion-label>New Customer?</ion-label> -->
-      <ion-button color="success" class="login-page-button" expand="block" routerLink="/signup">Sign Up</ion-button>
-      <h5 routerLink="/login">Back to Login</h5>
+      <ion-button color="success" class="login-page-button" expand="block" routerLink="/signup" type="submit">Sign Up</ion-button>
+      <h5 routerLink="/login" style="cursor: pointer;">Back to Login</h5>
     </div>
+  </form>
   </div>
 </ion-content>

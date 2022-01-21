@@ -3,131 +3,121 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title align-title="center">Booking</ion-title>
+    <ion-title style="text-align:center;">Book Trip</ion-title>
+    <!-- <img slot="end" class="sw-img" src="/assets/icons/bus.png" alt="dalex-swift" /> -->
   </ion-toolbar>
 </ion-header>
+
 <ion-content fullscreen>
-  <ion-card color="light">
-    <div *ngIf="!oneway">
-      <ion-card-header >
-        <ion-grid>
-          <ion-row>
-            <ion-col size="6">
-              <ion-button expand="full" >Roundtrip</ion-button>
-            </ion-col>
-            <ion-col size="6">
-              <ion-button expand="full" color="light" (click)="bookOneway()">Oneway</ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-header>
-      <ion-card-content color="light" >
-        <ion-card class="inner">
-          <ion-list>
-            <ion-item>
-              <ion-searchbar search-icon="location"  placeholder="From"></ion-searchbar>
-            </ion-item>
-            <ion-item lines="none">
-        <ion-searchbar  search-icon="location" placeholder="To"></ion-searchbar>
-            </ion-item>
-          </ion-list>
-        
-        </ion-card>
-        <ion-card class="inner">
-          <ion-list>
-            <ion-item>
-              <ion-datetime placeholder="Departure"  display-timezone="utc"></ion-datetime>
-            </ion-item>
-            <ion-item lines="none">
-              <ion-datetime placeholder="Return"  display-timezone="utc"></ion-datetime>
-            </ion-item>
-          </ion-list>
-        </ion-card>
-        <ion-button color="primary" expand="block">Search</ion-button>
+  <div class="grad"></div>
+  <ion-card  mode="ios" class="main" color="light">
+<!--    <button-->
+<!--      angular4-paystack-->
+<!--      [paystackOptions]="options"-->
+<!--      (paymentInit)="paymentInit()"-->
+<!--      (onClose)="paymentCancel()"-->
+<!--      (callback)="paymentDone($event)"-->
+<!--    >-->
+<!--      Pay with Paystack-->
+<!--    </button>-->
+    <form [formGroup]="form" (submit)="submit()"  *ngIf="!oneway">
+      <div *ngIf="!toggle">
+        <ion-card-header  mode="ios" >
+          <ion-grid >
+            <ion-row>
+              <ion-col  size="6">
+                <ion-button class="button-color" color="light"   mode="ios"  expand="block" >Roundtrip</ion-button>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button  mode="ios"  expand="block" color="light" (click)="bookOneway()">Oneway</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-header>
+        <ion-card-content color="light" >
+          <!--        <ion-list *ngIf="results">-->
+          <!--          <ion-item>{{results.driver}}</ion-item>-->
+          <!--        </ion-list>-->
+          <ion-label >From</ion-label>
+          <ion-select mode="ios" formControlName="departureLocation" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
+            <ion-select-option   *ngFor="let i of results" [value]="i.locationName" >{{i.locationName}}</ion-select-option>
+          </ion-select>
+          <!--        <ion-input shape="rectangle" class="login-page-input" name="phoneNumber"-->
+          <!--                   type="tel"></ion-input>-->
+          <ion-label>To</ion-label>
+          <ion-select mode="ios" formControlName="destination" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
+            <ion-select-option  *ngFor="let i of results" value="{{i.locationName}}" >{{i.locationName}}</ion-select-option>
+          </ion-select>
+          <ion-label>Departure</ion-label>
+          <ion-datetime mode="ios" placeholder="Select Date" formControlName="departureDate"  display-timezone="utc"></ion-datetime>
+          <ion-label>Return</ion-label>
+          <ion-datetime mode="ios" placeholder="Select Date" formControlName="returnDate" display-timezone="utc" ></ion-datetime>
+          <ion-label>Time</ion-label>
+          <ion-datetime displayFormat="HH:mm A"  formControlName="time" placeholder="Select Time"></ion-datetime>
+          <ion-button style="margin-top: 1.5rem; text-transform: uppercase" mode="ios" color="success" type="submit" expand="block">Search</ion-button>
+        </ion-card-content>
+      </div>
+    </form>
+    <div >
+      <ion-card-content *ngIf="toggle" >
+        <div *ngIf="!changePayment">
+          <h2 class="ion-text-center">SELECT YOUR PICKUP <br> LOCATION</h2>
+          <hr />
+          <ion-select mode="ios" [(ngModel)]="findLocation" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
+            <ion-select-option  *ngFor="let i of locations" value="{{i.location}}" >{{i.location}}</ion-select-option>
+          </ion-select>
+          <ion-button *ngIf="!changeToggle" style="margin-top: 1.5rem; text-transform: uppercase" mode="ios" color="success" (click)="final1Submit()" expand="block">Select</ion-button>
+          <ion-button  *ngIf="changeToggle" style="margin-top: 1.5rem; text-transform: uppercase" mode="ios" color="success" (click)="finalSubmit()" expand="block">Select</ion-button>
+        </div>
+
+        <div *ngIf="payment">
+          <div *ngIf="changePayment">
+            <h2 class="ion-text-center">TRIP CONFIRMATION PAY <br> {{fares}}{{fares1}} GH₵</h2>
+            <hr />
+
+            <ion-button angular4-paystack [paystackOptions]="options" expand="block" color="success" (paymentInit)="paymentInit()" (onClose)="paymentCancel()" (callback)="paymentDone($event)" (click)="freeze()">Pay</ion-button>
+          </div>
+
+        </div>
       </ion-card-content>
     </div>
-    <div *ngIf="oneway">
-      <ion-card-header >
-        <ion-grid>
-          <ion-row>
-            <ion-col size="6">
-              <ion-button expand="full" color="light" (click)="bookOneway()">Roundtrip</ion-button>
-            </ion-col>
-            <ion-col size="6">
-              <ion-button expand="full"   >Oneway</ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-header>
-      <ion-card-content color="light" >
-      <ion-card class="inner">
-        <ion-list>
-          <ion-item>
-            <ion-searchbar search-icon="location"  placeholder="From"></ion-searchbar>
-          </ion-item>
-          <ion-item lines="none">
-      <ion-searchbar  search-icon="location" placeholder="To"></ion-searchbar>
-          </ion-item>
-        </ion-list>
-      </ion-card>
-      <ion-card class="inner">
-        <ion-list>
-          <ion-item lines="none">
-            <ion-datetime placeholder="Departure"  display-timezone="utc"></ion-datetime>
-          </ion-item>
-        </ion-list>
-      </ion-card>
-      <ion-button color="primary" expand="block">Search</ion-button>
-    </ion-card-content>
-    </div>
-    
+
+    <form [formGroup]="form1" (submit)="submit1()">
+      <div *ngIf="oneway">
+        <div *ngIf="!toggle">
+          <ion-card-header  mode="ios" >
+            <ion-grid>
+              <ion-row>
+                <ion-col size="6">
+                  <ion-button expand="block" color="light" (click)="bookOneway()">Roundtrip</ion-button>
+                </ion-col>
+                <ion-col size="6">
+                  <ion-button expand="block" color="light" class="button-color">Oneway</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-header>
+          <ion-card-content color="light" >
+            <ion-label >From</ion-label>
+            <ion-select mode="ios"  formControlName="departureLocation1" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
+              <ion-select-option  *ngFor="let i of results" value="{{i.locationName}}" >{{i.locationName}}</ion-select-option>
+            </ion-select>
+            <ion-label>To</ion-label>
+            <ion-select mode="ios" formControlName="destination1" [(ngModel)]="destination" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
+              <ion-select-option  *ngFor="let i of results" value="{{i.locationName}}" >{{i.locationName}}</ion-select-option>
+            </ion-select>
+            <ion-label>Departure</ion-label>
+            <ion-datetime mode="ios" formControlName="departureDate1" presentation="date" [(ngModel)]="departureDate" placeholder="Select Date"   display-timezone="utc"></ion-datetime>
+            <ion-label>Time</ion-label>
+            <ion-datetime  displayFormat="HH:mm A"formControlName="time1" placeholder="Select Time"></ion-datetime>
+
+            <ion-button style="margin-top: 1.5rem; text-transform: uppercase" color="success"   type="submit" expand="block">Search</ion-button>
+          </ion-card-content>
+        </div>
+
+      </div>
+    </form>
+
   </ion-card>
-  <!-- <ion-card>
-    <ion-card-content>Ashanti</ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>Brong-Ahafo</ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>Central</ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>Eastern</ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>Greater Accra</ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>Northern</ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>Upper East</ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>Upper West</ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>Volta</ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>Western</ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>Oti</ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>Savannah</ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>Bono East</ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>Ahafo</ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>Volta</ion-card-content>
-  </ion-card>
-  <ion-card>
-    <ion-card-content>Western North</ion-card-content>
-  </ion-card> -->
+
 </ion-content>

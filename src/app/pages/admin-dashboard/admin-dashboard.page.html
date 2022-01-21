@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary" style="padding-right: 1.5rem;">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+<!--    <ion-title style="text-align:center;">Dashboard</ion-title>-->
+
+      <ion-avatar slot="end">
+        <ion-icon name="person-circle-outline"></ion-icon>
+      </ion-avatar>
+    <ion-label slot="end" class="ion-text-left"  (click)="presentActionSheet()">
+      <h3>{{username}}</h3>
+      <small>Online</small>
+    </ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-row>
+  <ion-col>
+    <ion-card mode="ios" class="ion-padding" routerLink="/view-user">
+      <div class="icon-style look">
+        <ion-icon name="people-outline" mode="ios"></ion-icon>
+      </div>
+      <div>
+        <h2>Travellers</h2>
+        <small>View all booked passengers</small>
+      </div>
+    </ion-card>
+  </ion-col>
+  <ion-col>
+    <ion-card mode="ios" class="ion-padding" routerLink="/add-bus">
+     <div class="icon-style look1">
+       <ion-icon name="bus-outline" mode="ios" ></ion-icon>
+     </div>
+      <div>
+        <h2>Add Buses</h2>
+        <small>Add available moving buses</small>
+      </div>
+    </ion-card>
+  </ion-col>
+  <ion-col>
+    <ion-card mode="ios" class="ion-padding" routerLink="/add-user">
+      <div class="icon-style look2">
+        <ion-icon name="person-add-outline" mode="ios" ></ion-icon>
+      </div>
+      <div>
+        <h2>Add User</h2>
+        <small>Create new back office user</small>
+      </div>
+    </ion-card>
+  </ion-col>
+</ion-row>
+  <ion-row>
+    <ion-col size="4">
+      <ion-card mode="ios" class="ion-padding" routerLink="/view-buses">
+        <div class="icon-style look3">
+          <ion-icon name="bus-outline" mode="ios" ></ion-icon>
+          <ion-icon class="bus" name="bus-outline" mode="ios" ></ion-icon>
+        </div>
+        <div>
+          <h2>Available Buses</h2>
+          <small>View all available buses</small>
+        </div>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

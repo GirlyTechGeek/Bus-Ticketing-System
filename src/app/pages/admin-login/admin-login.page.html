@@ -1,0 +1,24 @@
+
+<ion-content >
+  <div class="back">
+    <ion-row>
+      <ion-col>
+        <img class="sp-img"  src="/assets/icons/bus.png" alt="yenkor" />
+      </ion-col>
+      <ion-col class="content-style container">
+        <div class="login-header">
+          <h1>Login</h1>
+          <p>Please log in to access your account.</p>
+        </div>
+        <form action="login.php" [formGroup]="form" (submit)="submit($event)" >
+          <ion-label>Phone Number</ion-label>
+          <ion-input type="tel" inputmode="tel" name="phoneNumber" formControlName="phoneNumber"></ion-input>
+          <ion-label>PIN</ion-label>
+          <ion-input name="pin" formControlName="pin" type="password"></ion-input>
+          <ion-button color="success" class="mt-3" expand="block" mode="ios" type="submit"> LOGIN</ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </div>
+
+</ion-content>

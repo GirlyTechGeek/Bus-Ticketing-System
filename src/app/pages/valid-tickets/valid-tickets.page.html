@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary" style="padding-right: 1.5rem;">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title style="text-align:center;">Valid Tickets</ion-title>
+    <ion-label slot="end" class="ion-text-left">
+      <h3>{{username}}</h3>
+      <small>Online</small>
+    </ion-label>
+    <!-- <img slot="end" class="sw-img" src="/assets/icons/bus.png" alt="dalex-swift" /> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<div>
+  <ion-item-sliding *ngFor="let i of tripResults">
+    <ion-item  lines="none">
+      <article class="card mt-3" >
+        <section class="date">
+          <time style="color: #0A3A50" datetime="23th feb">
+            <span>{{i.departureDate.split(' ')[1] | date}}</span><span>{{i.departureDate.split(' ')[0] | date}}</span>
+          </time>
+        </section>
+        <section class="card-cont">
+          <h3>{{i.brand}}</h3>
+          <h3>{{i.destination}} </h3>
+          <div class="even-date">
+            <i class="fa fa-calendar"></i>
+            <time>
+              <span>{{i.departureDate | date}}</span>
+              <span>Time</span>
+            </time>
+          </div>
+          <div class="even-info">
+            <i class="fa fa-map-marker"></i>
+            <p>
+              Preferred location
+            </p>
+          </div>
+          <a *ngIf="i.departureDate < dateChecker" style="background-color: #f25454">Invalid</a>
+          <a *ngIf="i.departureDate >= dateChecker" style="background-color: #28e070">Valid</a>
+        </section>
+      </article>
+    </ion-item>
+    <ion-item-options side="end">
+      <ion-item-option  *ngIf="i.departureDate >= dateChecker" color="primary" style="color: white" (click)="firstEdit(i.tripID, i.location, i.destination, i.departureDate, i.returnDate,i.requestTime)">EDIT</ion-item-option>
+      <ion-item-option  *ngIf="i.departureDate < dateChecker" color="danger" style="color: white" (click)="deleteRecord(i.tripID)">DELETE</ion-item-option>
+    </ion-item-options>
+
+  </ion-item-sliding>
+
+</div>
+</ion-content>

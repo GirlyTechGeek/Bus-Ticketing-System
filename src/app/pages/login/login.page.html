@@ -2,24 +2,47 @@
   <div>
     <img class="sp-img" src="/assets/icons/bus.png" alt="yenkor" />
   </div>
+  <div *ngIf="!toggleScreen">
   <div class="login-header">
     <h1>Login</h1>
     <p>Please log in to access your account.</p>
   </div>
   <div>
-    <div style="margin: 2rem">
-      <ion-label position="stacked">Phone Number</ion-label>
-      <ion-input shape="rectangle" class="login-page-input" type="tel"></ion-input>
-      <ion-label position="stacked">PIN</ion-label>
-      <ion-input shape="rectangle" class="login-page-input" type="password"></ion-input>
-    </div>
-    <div style="margin-left: 2rem; margin-right: 2rem;">
-      <ion-button color="success" class="login-page-button" expand="block" routerLink="/dashboard">Login</ion-button>
-      <!-- <ion-label style="float: right;">Forgot your PIN?</ion-label> -->
-    </div>
+    <form action="login.php" [formGroup]="form" (submit)="submit($event)" >
+      <div style="margin: 2rem">
+        <ion-label position="stacked">Phone Number</ion-label>
+        <ion-input shape="rectangle" class="login-page-input" name="phoneNumber" formControlName="phoneNumber"
+          type="tel"></ion-input>
+        <ion-label position="stacked">PIN</ion-label>
+        <ion-input shape="rectangle" class="login-page-input" name="pin" formControlName="pin" type="password">
+        </ion-input>
+      </div>
+      <div style="margin-left: 2rem; margin-right: 2rem;">
+        <ion-button color="success" mode="ios" class="login-page-button" expand="block" type="submit">Login</ion-button>
+        <ion-label style="float: right;" (click)="forgotPassword()">Forgot your PIN?</ion-label>
+      </div>
+    </form>
     <div style="margin-top: 3rem; margin: 2rem;">
       <ion-label>New Customer?</ion-label>
-      <ion-button color="success" class="login-page-button" expand="block" routerLink="/signup">Sign Up</ion-button>
+      <ion-button color="success" mode="ios" class="login-page-button" expand="block" routerLink="/signup">Sign Up</ion-button>
     </div>
   </div>
+  </div>
+  <form action="reset.php" [formGroup]="form1" (submit)="submit1()">
+    <ion-card *ngIf="toggleScreen">
+      <ion-card-content>
+        <div style="text-align: center;">
+          <p class="funds">Forgot PIN</p>
+          <hr />
+          <p class="mb-4 redeem">Request for a new PIN!</p>
+        </div>
+        <ion-label position="stacked">Phone Number</ion-label>
+        <ion-input shape="rectangle" class="login-page-input" type="tel" pattern="[0-9]{10}"
+                   formControlName="phoneNumber1"></ion-input>
+        <ion-button color="success" class="login-page-button mt-3" expand="block" type="submit" >
+          Request</ion-button>
+        <h5 (click)="toggle()" style="cursor: pointer;">Back to Login</h5>
+      </ion-card-content>
+    </ion-card>
+  </form>
 </ion-content>

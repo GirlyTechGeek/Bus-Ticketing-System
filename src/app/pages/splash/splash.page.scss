@@ -13,13 +13,15 @@ ion-content {
 	#topToBottom{
 		top: 50%;
 		position: relative;
-		animation: drop 5s 1;
-		animation-direction: alternate;
+		animation: up-down 1s ease-in-out infinite alternate-reverse both;
+		// animation-direction: alternate;
 	}
-	@keyframes drop {
-		50%{
-			left: 0;
-			top: -30%;
+	@keyframes up-down {
+		0% {
+		  transform: translateY(10px);
+		}
+		100% {
+		  transform: translateY(-10px);
 		}
 	}
 	.sw-imgs {
@@ -32,16 +34,5 @@ ion-content {
 		transform: translate(-50%, -50%);
 		padding: 5px;
 	}
-	#bottomToTop{
-		top: 90%;
-		position: relative;
-		animation: fall 5s 1;
-		animation-direction: alternate;
-	}
-	@keyframes fall {
-		90%{
-			left: 0;
-			top: 120%;
-		}
-	}
+	
 }
