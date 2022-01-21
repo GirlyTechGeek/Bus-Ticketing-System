@@ -19,11 +19,12 @@ export class DepositPage implements OnInit {
   brands: any;
   brand: any;
   findLocation: any;
+  today = new Date().toJSON().split('T')[0];
   fares: any;
   fares1: any;
   to = localStorage.getItem('fare');
   options: PaystackOptions = {
-    amount: parseInt(this.to, 2),
+    amount: parseInt(this.to),
     email: 'asunkaa41@gmail.com',
     ref: `${Math.ceil(Math.random() * 10e10)}`,
     currency: 'GHS',
@@ -346,7 +347,7 @@ pay(){
                   role: 'confirm',
                   handler: async () =>{
                     this.changePayment = true;
-                    this.payment = true
+                    this.payment = true;
                   }
 
                 }
