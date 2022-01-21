@@ -6,9 +6,9 @@
     <h1>Sign Up</h1>
     <p>Please Sign Up to creat an account.</p>
   </div>
-  <div>
+  <div class="ion-padding">
     <form action="register.php" [formGroup]="form" (submit)="submit($event)">
-    <div style="margin: 2rem">
+    <div>
       <ion-label position="stacked"> Username</ion-label>
       <ion-input shape="rectangle" class="login-page-input" type="text" name="username" formControlName="username"></ion-input>
       <ion-label position="stacked">First Name</ion-label>
@@ -24,7 +24,7 @@
       <ion-button color="secondary" class="login-page-button" expand="block" routerLink="/dashboard">Login</ion-button>
       <ion-label style="float: right;">Forgot your PIN?</ion-label>
     </div> -->
-    <div style="margin: 2rem">
+    <div style="margin-top: 2rem">
       <!-- <ion-label>New Customer?</ion-label> -->
       <ion-button color="success" class="login-page-button" expand="block" routerLink="/signup" type="submit">Sign Up</ion-button>
       <h5 routerLink="/login" style="cursor: pointer;">Back to Login</h5>

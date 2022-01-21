@@ -7,9 +7,9 @@
     <h1>Login</h1>
     <p>Please log in to access your account.</p>
   </div>
-  <div>
+  <div class="ion-padding">
     <form action="login.php" [formGroup]="form" (submit)="submit($event)" >
-      <div style="margin: 2rem">
+      <div >
         <ion-label position="stacked">Phone Number</ion-label>
         <ion-input shape="rectangle" class="login-page-input" name="phoneNumber" formControlName="phoneNumber"
           type="tel"></ion-input>
@@ -17,12 +17,12 @@
         <ion-input shape="rectangle" class="login-page-input" name="pin" formControlName="pin" type="password">
         </ion-input>
       </div>
-      <div style="margin: 2rem">
+      <div style="margin-top: 2rem">
         <ion-button color="success" mode="ios" class="login-page-button" expand="block" type="submit">Login</ion-button>
         <ion-label style="float: right;" (click)="forgotPassword()">Forgot your PIN?</ion-label>
       </div>
     </form>
-    <div style="margin-top: 3rem; margin: 2rem;">
+    <div style="margin-top: 3rem">
       <ion-label>New Customer?</ion-label>
       <ion-button color="success" mode="ios" class="login-page-button" expand="block" routerLink="/signup">Sign Up</ion-button>
     </div>
