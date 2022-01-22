@@ -11,14 +11,14 @@
     <form action="login.php" [formGroup]="form" (submit)="submit($event)" >
       <div >
         <ion-label position="stacked">Phone Number</ion-label>
-        <ion-input shape="rectangle" class="login-page-input" name="phoneNumber" formControlName="phoneNumber"
+        <ion-input shape="rectangle" class="login-page-input" name="phoneNumber" formControlName="phoneNumber" maxlength="10"
           type="tel"></ion-input>
         <ion-label position="stacked">PIN</ion-label>
-        <ion-input shape="rectangle" class="login-page-input" name="pin" formControlName="pin" type="password">
+        <ion-input shape="rectangle" class="login-page-input" name="pin" formControlName="pin" type="password" maxlength="4">
         </ion-input>
       </div>
       <div style="margin-top: 2rem">
-        <ion-button color="success" mode="ios" class="login-page-button" expand="block" type="submit">Login</ion-button>
+        <ion-button color="success" mode="ios"  expand="block" type="submit">Login</ion-button>
         <ion-label style="float: right;" (click)="forgotPassword()">Forgot your PIN?</ion-label>
       </div>
     </form>

@@ -35,9 +35,6 @@
           </ion-grid>
         </ion-card-header>
         <ion-card-content color="light" >
-          <!--        <ion-list *ngIf="results">-->
-          <!--          <ion-item>{{results.driver}}</ion-item>-->
-          <!--        </ion-list>-->
           <ion-label >From</ion-label>
           <ion-select mode="ios" formControlName="departureLocation" [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One" >
             <ion-select-option   *ngFor="let i of results" [value]="i.locationName" >{{i.locationName}}</ion-select-option>
@@ -49,9 +46,9 @@
             <ion-select-option  *ngFor="let i of results" value="{{i.locationName}}" >{{i.locationName}}</ion-select-option>
           </ion-select>
           <ion-label>Departure</ion-label>
-          <ion-datetime mode="ios" placeholder="Select Date" formControlName="departureDate"  display-timezone="utc"></ion-datetime>
+          <ion-datetime mode="ios" placeholder="Select Date"  [min]="today" formControlName="departureDate"  display-timezone="utc"></ion-datetime>
           <ion-label>Return</ion-label>
-          <ion-datetime mode="ios" placeholder="Select Date" formControlName="returnDate" display-timezone="utc" ></ion-datetime>
+          <ion-datetime mode="ios" placeholder="Select Date" [min]="today"  formControlName="returnDate" display-timezone="utc" ></ion-datetime>
           <ion-label>Time</ion-label>
           <ion-datetime displayFormat="HH:mm A"  formControlName="time" placeholder="Select Time"></ion-datetime>
           <ion-button style="margin-top: 1.5rem; text-transform: uppercase" mode="ios" color="success" type="submit" expand="block">Search</ion-button>
@@ -107,7 +104,7 @@
               <ion-select-option  *ngFor="let i of results" value="{{i.locationName}}" >{{i.locationName}}</ion-select-option>
             </ion-select>
             <ion-label>Departure</ion-label>
-            <ion-datetime mode="ios" formControlName="departureDate1" presentation="date" [(ngModel)]="departureDate" placeholder="Select Date"   display-timezone="utc"></ion-datetime>
+            <ion-datetime mode="ios" formControlName="departureDate1" [min]="today"   presentation="date" [(ngModel)]="departureDate" placeholder="Select Date"   display-timezone="utc"></ion-datetime>
             <ion-label>Time</ion-label>
             <ion-datetime  displayFormat="HH:mm A"formControlName="time1" placeholder="Select Time"></ion-datetime>
 

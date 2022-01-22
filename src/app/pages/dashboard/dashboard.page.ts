@@ -3,7 +3,7 @@ import {AlertController, LoadingController, MenuController} from '@ionic/angular
 import {} from 'googlemaps';
 import {ApiService} from "../../api.service";
 import {DatePipe} from "@angular/common";
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 let map: google.maps.Map;
 
@@ -46,7 +46,10 @@ export class DashboardPage implements OnInit {
         await this.loader.dismiss();
         console.log(this.tripResults);
         this.dateChecker = this.dataPipe.transform(this.dateChecker, 'yyyy-MM-dd');
-      });
+      }, (err: any) => {
+        console.log(err);
+        this.loader.dismiss();
+      } );
     });
   };
   // freeze ui
